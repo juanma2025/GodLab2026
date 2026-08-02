@@ -86,14 +86,16 @@ export function Header({
       </nav>
 
       {menuOpen ? (
-        <div className="mobile-menu-panel border-t border-white/10 bg-[#0b0b0b]/95 md:hidden">
+        <div
+          className={`mobile-menu-panel ${isLightMode ? 'mobile-menu-panel--light' : ''} border-t md:hidden`}
+        >
           <div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-6 sm:px-8">
             <ul className="flex flex-col gap-4 text-sm uppercase tracking-[0.26em] text-[#FFF9EF]/90">
               {navigationPages.map((page) => (
                 <li key={page.id}>
                   <button
                     type="button"
-                    className={`w-full text-left transition hover:text-[#EEC77F] ${
+                    className={`mobile-menu-link w-full text-left transition hover:text-[#EEC77F] ${
                       activePage === page.id ? 'text-[#EEC77F]' : ''
                     }`}
                     onClick={() => handleNavigate(page.id)}

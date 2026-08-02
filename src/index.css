@@ -126,6 +126,41 @@ body.theme-light {
   background: rgba(0, 0, 0, 0.96);
 }
 
+.mobile-menu-panel--light {
+  border-color: rgba(123, 85, 39, 0.14);
+  background: rgba(255, 250, 242, 0.95);
+}
+
+.mobile-menu-link {
+  color: rgba(255, 249, 239, 0.95);
+}
+
+.mobile-menu-link:hover,
+.mobile-menu-link:focus-visible {
+  color: #eec77f;
+}
+
+.mobile-menu-panel--light .mobile-menu-link {
+  color: rgba(27, 21, 15, 0.95);
+}
+
+.mobile-menu-panel--light .mobile-menu-link:hover,
+.mobile-menu-panel--light .mobile-menu-link:focus-visible {
+  color: rgba(123, 85, 39, 0.95);
+}
+
+.theme-light .mobile-menu-button {
+  border-color: rgba(123, 85, 39, 0.25);
+  background: rgba(255, 250, 242, 0.92);
+  color: rgba(33, 22, 12, 0.95);
+}
+
+.theme-light .mobile-menu-button:hover,
+.theme-light .mobile-menu-button:focus-visible {
+  border-color: rgba(123, 85, 39, 0.6);
+  color: rgba(33, 22, 12, 0.95);
+}
+
 .reserve-link {
   display: inline-flex;
   align-items: center;
