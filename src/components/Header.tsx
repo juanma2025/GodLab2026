@@ -106,15 +106,6 @@ export function Header({
             <div className="flex flex-col gap-3">
               <button
                 type="button"
-                className="theme-toggle inline-flex items-center justify-center gap-2 border font-heading text-[0.72rem] font-semibold uppercase tracking-[0.18em] transition w-full"
-                onClick={onToggleTheme}
-                aria-label={isLightMode ? 'Activar modo oscuro' : 'Activar modo claro'}
-              >
-                <span className="theme-toggle__icon" aria-hidden="true" />
-                {isLightMode ? 'Oscuro' : 'Claro'}
-              </button>
-              <button
-                type="button"
                 className="reserve-link inline-flex items-center justify-center border px-4 py-3 font-heading text-[0.72rem] font-semibold uppercase tracking-[0.24em] transition w-full"
                 onClick={() => handleNavigate('contacto')}
               >
