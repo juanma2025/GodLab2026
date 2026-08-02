@@ -37,9 +37,19 @@ export function CatalogProductCard({ product }: CatalogProductCardProps) {
         <p className="mt-4 text-[0.98rem] leading-7">
           {product.description}
         </p>
-        <p className="catalog-card__finish mt-5 border-t pt-4 font-heading text-[0.68rem] uppercase tracking-[0.18em]">
-          {product.finish}
-        </p>
+        <div className="mt-5 flex flex-wrap items-center justify-between border-t pt-4">
+          <p className="catalog-card__finish font-heading text-[0.68rem] uppercase tracking-[0.18em]">
+            {product.finish}
+          </p>
+          <div className="mt-3 flex items-center gap-3 text-sm text-[#FFF9EF]/85 sm:mt-0">
+            <span className="font-semibold">${product.price}</span>
+            {product.discount ? (
+              <span className="rounded-full border border-[#EEC77F]/20 bg-[#EEC77F]/10 px-2 py-1 text-[0.65rem] uppercase tracking-[0.08em] text-[#EEC77F]">
+                -{product.discount}%
+              </span>
+            ) : null}
+          </div>
+        </div>
       </div>
     </article>
   )

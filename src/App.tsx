@@ -7,7 +7,7 @@ import { Header } from './components/Header'
 import { HeroSection } from './components/HeroSection'
 import { MethodSection } from './components/MethodSection'
 import { PortfolioLines } from './components/PortfolioLines'
-import type { CatalogFilter } from './data/catalog'
+import type { CatalogFilter, CatalogSort } from './data/catalog'
 import type { PageId } from './data/navigation'
 
 const pageTitles: Record<PageId, string> = {
@@ -30,6 +30,7 @@ function getPageFromHash(): PageId {
 function App() {
   const [activePage, setActivePage] = useState<PageId>(getPageFromHash)
   const [activeFilter, setActiveFilter] = useState<CatalogFilter>('Todos')
+  const [activeSort, setActiveSort] = useState<CatalogSort>('En primer plano')
   const [isLightMode, setIsLightMode] = useState(false)
 
   useEffect(() => {
@@ -68,7 +69,9 @@ function App() {
         return (
           <CatalogSection
             activeFilter={activeFilter}
+            activeSort={activeSort}
             onSelectFilter={setActiveFilter}
+            onSelectSort={setActiveSort}
           />
         )
       case 'marca':
