@@ -230,8 +230,8 @@ export function CatalogSection({
         </div>
 
         {showFilters && (
-          <div className="catalog-panel mt-5 grid gap-4 md:grid-cols-4">
-              <div className="catalog-panel__section">
+          <div className="catalog-panel mt-5 grid grid-cols-1 gap-4 md:grid-cols-4">
+            <div className="catalog-panel__section">
                 <div className="flex items-center justify-between gap-4">
                   <p className="mb-3 font-heading text-[0.72rem] uppercase tracking-[0.3em] text-[#EEC77F]">
                     Color
