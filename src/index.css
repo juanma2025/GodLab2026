@@ -441,6 +441,46 @@ body.theme-light {
   }
 }
 
+.catalog-panel__section-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0.75rem;
+  border: none;
+  border-radius: 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 249, 239, 0.95);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  cursor: pointer;
+  transition: background 240ms ease, transform 240ms ease;
+}
+
+.catalog-panel__section-header:hover,
+.catalog-panel__section-header:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.catalog-panel__section-icon {
+  transition: transform 200ms ease;
+}
+
+.catalog-panel__section-icon--open {
+  transform: rotate(180deg);
+}
+
+.catalog-panel__section-content {
+  padding-top: 1rem;
+}
+
+.catalog-panel__section-content.hidden {
+  display: none;
+}
+
 .catalog-panel__section {
   padding: 1rem;
   border-radius: 0.85rem;

@@ -95,6 +95,7 @@ export function CatalogSection({
     rating: null,
   })
   const [pendingSort, setPendingSort] = useState<CatalogSort>(activeSort)
+  const [expandedSection, setExpandedSection] = useState<string | null>(null)
 
   useEffect(() => {
     setPendingSort(activeSort)
@@ -242,11 +243,21 @@ export function CatalogSection({
                 ×
               </button>
             </div>
+
             <div className="catalog-panel__section">
-                <div className="flex items-center justify-between gap-4">
-                  <p className="mb-3 font-heading text-[0.72rem] uppercase tracking-[0.3em] text-[#EEC77F]">
-                    Color
-                  </p>
+              <button
+                type="button"
+                className="catalog-panel__section-header"
+                onClick={() => setExpandedSection((current) => (current === 'color' ? null : 'color'))}
+                aria-expanded={expandedSection === 'color'}
+              >
+                <span>Color</span>
+                <span className={`catalog-panel__section-icon ${expandedSection === 'color' ? 'catalog-panel__section-icon--open' : ''}`}>
+                  ▾
+                </span>
+              </button>
+              <div className={`catalog-panel__section-content ${expandedSection === 'color' ? 'block' : 'hidden'} md:block`}>
+                <div className="flex items-center justify-end gap-4">
                   {pendingColor ? (
                     <button
                       type="button"
@@ -282,22 +293,21 @@ export function CatalogSection({
                   )}
                 </div>
               </div>
+            </div>
 
-              <div className="catalog-panel__section">
-                <div className="flex items-center justify-between gap-4">
-                  <p className="mb-3 font-heading text-[0.72rem] uppercase tracking-[0.3em] text-[#EEC77F]">
-                    Finish
-                  </p>
-                  {pendingFinish ? (
-                    <button
-                      type="button"
-                      className="catalog-panel__clear"
-                      onClick={clearFinish}
-                    >
-                      Borrar
-                    </button>
-                  ) : null}
-                </div>
+            <div className="catalog-panel__section">
+              <button
+                type="button"
+                className="catalog-panel__section-header"
+                onClick={() => setExpandedSection((current) => (current === 'finish' ? null : 'finish'))}
+                aria-expanded={expandedSection === 'finish'}
+              >
+                <span>Finish</span>
+                <span className={`catalog-panel__section-icon ${expandedSection === 'finish' ? 'catalog-panel__section-icon--open' : ''}`}>
+                  ▾
+                </span>
+              </button>
+              <div className={`catalog-panel__section-content ${expandedSection === 'finish' ? 'block' : 'hidden'} md:block`}>
                 <div className="grid gap-3">
                   {catalogFinishOptions.map((option) => {
                     const isActive = pendingFinish === option
@@ -318,22 +328,21 @@ export function CatalogSection({
                   })}
                 </div>
               </div>
+            </div>
 
-              <div className="catalog-panel__section">
-                <div className="flex items-center justify-between gap-4">
-                  <p className="mb-3 font-heading text-[0.72rem] uppercase tracking-[0.3em] text-[#EEC77F]">
-                    Cobertura
-                  </p>
-                  {pendingCoverage ? (
-                    <button
-                      type="button"
-                      className="catalog-panel__clear"
-                      onClick={clearCoverage}
-                    >
-                      Borrar
-                    </button>
-                  ) : null}
-                </div>
+            <div className="catalog-panel__section">
+              <button
+                type="button"
+                className="catalog-panel__section-header"
+                onClick={() => setExpandedSection((current) => (current === 'coverage' ? null : 'coverage'))}
+                aria-expanded={expandedSection === 'coverage'}
+              >
+                <span>Cobertura</span>
+                <span className={`catalog-panel__section-icon ${expandedSection === 'coverage' ? 'catalog-panel__section-icon--open' : ''}`}>
+                  ▾
+                </span>
+              </button>
+              <div className={`catalog-panel__section-content ${expandedSection === 'coverage' ? 'block' : 'hidden'} md:block`}>
                 <div className="grid gap-3">
                   {catalogCoverageOptions.map((option) => {
                     const isActive = pendingCoverage === option
@@ -354,22 +363,21 @@ export function CatalogSection({
                   })}
                 </div>
               </div>
+            </div>
 
-              <div className="catalog-panel__section">
-                <div className="flex items-center justify-between gap-4">
-                  <p className="mb-3 font-heading text-[0.72rem] uppercase tracking-[0.3em] text-[#EEC77F]">
-                    Calificación
-                  </p>
-                  {pendingRating ? (
-                    <button
-                      type="button"
-                      className="catalog-panel__clear"
-                      onClick={clearRating}
-                    >
-                      Borrar
-                    </button>
-                  ) : null}
-                </div>
+            <div className="catalog-panel__section">
+              <button
+                type="button"
+                className="catalog-panel__section-header"
+                onClick={() => setExpandedSection((current) => (current === 'rating' ? null : 'rating'))}
+                aria-expanded={expandedSection === 'rating'}
+              >
+                <span>Calificación</span>
+                <span className={`catalog-panel__section-icon ${expandedSection === 'rating' ? 'catalog-panel__section-icon--open' : ''}`}>
+                  ▾
+                </span>
+              </button>
+              <div className={`catalog-panel__section-content ${expandedSection === 'rating' ? 'block' : 'hidden'} md:block`}>
                 <div className="grid gap-3">
                   {catalogRatingOptions.map((option) => {
                     const isActive = pendingRating === option.value
@@ -390,43 +398,44 @@ export function CatalogSection({
                   })}
                 </div>
               </div>
+            </div>
 
-              <div className="col-span-4 mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="col-span-4 mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <button
+                type="button"
+                className="catalog-panel__search-button"
+                onClick={applyFilterSearch}
+              >
+                Ver resultados
+              </button>
+              <button
+                type="button"
+                className="catalog-panel__clear catalog-panel__clear--footer"
+                onClick={clearAllPendingFilters}
+              >
+                Borrar todo
+              </button>
+            </div>
+            {hasAdvancedFilters ? (
+              <div className="col-span-4 mt-5 border-t border-[#EEC77F]/10 pt-5 text-sm text-[#FFF9EF]/75">
+                <p>
+                  Recomendado para: {appliedFilters.color ?? 'Cualquier color'} · {appliedFilters.finish ?? 'Cualquier acabado'} · {appliedFilters.coverage ?? 'Cualquier cobertura'} · {appliedFilters.rating ? `${appliedFilters.rating.toFixed(1)}+ estrellas` : 'Cualquier rating'}
+                </p>
                 <button
                   type="button"
-                  className="catalog-panel__search-button"
-                  onClick={applyFilterSearch}
+                  className="catalog-panel__clear mt-3"
+                  onClick={clearAllAppliedFilters}
                 >
-                  Ver resultados
-                </button>
-                <button
-                  type="button"
-                  className="catalog-panel__clear catalog-panel__clear--footer"
-                  onClick={clearAllPendingFilters}
-                >
-                  Borrar todo
+                  Limpiar filtros
                 </button>
               </div>
-              {hasAdvancedFilters ? (
-                <div className="col-span-4 mt-5 border-t border-[#EEC77F]/10 pt-5 text-sm text-[#FFF9EF]/75">
-                  <p>
-                    Recomendado para: {appliedFilters.color ?? 'Cualquier color'} · {appliedFilters.finish ?? 'Cualquier acabado'} · {appliedFilters.coverage ?? 'Cualquier cobertura'} · {appliedFilters.rating ? `${appliedFilters.rating.toFixed(1)}+ estrellas` : 'Cualquier rating'}
-                  </p>
-                  <button
-                    type="button"
-                    className="catalog-panel__clear mt-3"
-                    onClick={clearAllAppliedFilters}
-                  >
-                    Limpiar filtros
-                  </button>
-                </div>
-              ) : (
-                <div className="col-span-4 mt-5 border-t border-[#EEC77F]/10 pt-5 text-sm text-[#FFF9EF]/70">
-                  Selecciona un color, acabado, cobertura o rating para ver recomendaciones personalizadas.
-                </div>
-              )}
-            </div>
-          )}
+            ) : (
+              <div className="col-span-4 mt-5 border-t border-[#EEC77F]/10 pt-5 text-sm text-[#FFF9EF]/70">
+                Selecciona un color, acabado, cobertura o rating para ver recomendaciones personalizadas.
+              </div>
+            )}
+          </div>
+        )}
 
         {showSortMenu && (
           <div className="catalog-panel mt-5">
