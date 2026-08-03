@@ -342,10 +342,33 @@ body.theme-light {
   border-radius: 1rem;
 }
 
+/* Overlay variant: smaller rectangular panel positioned over the catalog items */
+.catalog-inner .catalog-panel {
+  position: absolute;
+  top: 1.5rem;
+  left: 1rem;
+  right: 1rem;
+  width: calc(100% - 2rem);
+  max-width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 0.85rem;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(6px) saturate(120%);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  z-index: 40;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(18rem, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
 .catalog-panel__section {
   padding: 1rem;
   border-radius: 0.85rem;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(15, 9, 4, 0.92);
+  color: var(--gl-cream);
+  min-width: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .catalog-color-chip {
@@ -412,6 +435,20 @@ body.theme-light {
   background: rgba(238, 199, 127, 0.2);
   border-color: rgba(238, 199, 127, 0.8);
   transform: translateY(-1px);
+}
+
+/* In light theme the button needs darker text to remain legible */
+.theme-light .catalog-panel__search-button {
+  background: rgba(238, 199, 127, 0.9);
+  color: var(--gl-black);
+  border-color: rgba(123, 85, 39, 0.35);
+}
+
+.theme-light .catalog-panel__search-button:hover,
+.theme-light .catalog-panel__search-button:focus-visible {
+  background: linear-gradient(135deg, rgba(123,85,39,0.95), rgba(238,199,127,0.95));
+  color: var(--gl-light-panel);
+  border-color: transparent;
 }
 
 .catalog-card {
@@ -615,8 +652,50 @@ body.theme-light {
   background: rgba(255, 250, 242, 0.9);
 }
 
-.theme-light .catalog-panel__section {
-  background: rgba(255, 255, 255, 0.82);
+/* Make inner sections look like floating cards with slight transparency */
+.theme-light .catalog-inner .catalog-panel .catalog-panel__section {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 0.65rem;
+  padding: 1rem;
+  box-shadow: 0 8px 20px rgba(15, 9, 4, 0.06);
+}
+
+/* Responsive: stack the filter cards vertically on small screens */
+@media (max-width: 640px) {
+  .catalog-inner .catalog-panel {
+    grid-template-columns: 1fr;
+    max-height: 72vh;
+    overflow: auto;
+    padding: 1rem;
+  }
+
+  .catalog-inner .catalog-panel .catalog-panel__section {
+    padding: 0.9rem;
+  }
+}
+
+/* Dark theme for the overlay */
+.theme-dark .catalog-inner .catalog-panel {
+  background: rgba(10, 10, 10, 0.85);
+}
+
+.theme-dark .catalog-inner .catalog-panel .catalog-panel__section {
+  background: rgba(15, 9, 4, 0.92);
+  color: var(--gl-cream);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.catalog-inner .catalog-panel .catalog-panel__section .catalog-color-chip {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.theme-light .catalog-inner .catalog-panel {
+  background: rgba(255, 250, 242, 0.72);
+}
+
+.theme-light .catalog-inner .catalog-panel .catalog-panel__section {
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--gl-light-ink);
 }
 
 .theme-light .catalog-card {

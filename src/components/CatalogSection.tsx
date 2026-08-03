@@ -167,7 +167,7 @@ export function CatalogSection({
       id="catalogo"
       className="catalog-section scroll-mt-24 border-y px-5 py-20 sm:px-8"
     >
-      <section className="mx-auto max-w-7xl">
+      <section className="mx-auto max-w-7xl catalog-inner relative">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <h2 className="mt-4 max-w-4xl font-heading text-3xl uppercase tracking-[0.12em] text-[#FFF9EF] sm:text-5xl">
@@ -230,8 +230,7 @@ export function CatalogSection({
         </div>
 
         {showFilters && (
-          <div className="catalog-panel mt-5">
-            <div className="grid gap-4 xl:grid-cols-2">
+          <div className="catalog-panel mt-5 grid gap-4 md:grid-cols-4">
               <div className="catalog-panel__section">
                 <div className="flex items-center justify-between gap-4">
                   <p className="mb-3 font-heading text-[0.72rem] uppercase tracking-[0.3em] text-[#EEC77F]">
@@ -273,153 +272,150 @@ export function CatalogSection({
                 </div>
               </div>
 
-              <div className="grid gap-4">
-                <div className="catalog-panel__section">
-                  <div className="flex items-center justify-between gap-4">
-                    <p className="mb-3 font-heading text-[0.72rem] uppercase tracking-[0.3em] text-[#EEC77F]">
-                      Finish
-                    </p>
-                    {pendingFinish ? (
-                      <button
-                        type="button"
-                        className="catalog-panel__clear"
-                        onClick={clearFinish}
-                      >
-                        Borrar
-                      </button>
-                    ) : null}
-                  </div>
-                  <div className="grid gap-3">
-                    {catalogFinishOptions.map((option) => {
-                      const isActive = pendingFinish === option
-                      return (
-                        <button
-                          key={option}
-                          type="button"
-                          className={`catalog-filter border px-4 py-3 text-left font-heading text-[0.74rem] font-semibold uppercase tracking-[0.18em] transition ${
-                            isActive
-                              ? 'catalog-filter--active'
-                              : 'border-[#EEC77F]/25 text-[#FFF9EF]/76 hover:border-[#EEC77F] hover:text-[#EEC77F]'
-                          }`}
-                          onClick={() => setPendingFinish(option)}
-                        >
-                          {option}
-                        </button>
-                      )
-                    })}
-                  </div>
+              <div className="catalog-panel__section">
+                <div className="flex items-center justify-between gap-4">
+                  <p className="mb-3 font-heading text-[0.72rem] uppercase tracking-[0.3em] text-[#EEC77F]">
+                    Finish
+                  </p>
+                  {pendingFinish ? (
+                    <button
+                      type="button"
+                      className="catalog-panel__clear"
+                      onClick={clearFinish}
+                    >
+                      Borrar
+                    </button>
+                  ) : null}
                 </div>
-
-                <div className="catalog-panel__section">
-                  <div className="flex items-center justify-between gap-4">
-                    <p className="mb-3 font-heading text-[0.72rem] uppercase tracking-[0.3em] text-[#EEC77F]">
-                      Cobertura
-                    </p>
-                    {pendingCoverage ? (
+                <div className="grid gap-3">
+                  {catalogFinishOptions.map((option) => {
+                    const isActive = pendingFinish === option
+                    return (
                       <button
+                        key={option}
                         type="button"
-                        className="catalog-panel__clear"
-                        onClick={clearCoverage}
+                        className={`catalog-filter border px-4 py-3 text-left font-heading text-[0.74rem] font-semibold uppercase tracking-[0.18em] transition ${
+                          isActive
+                            ? 'catalog-filter--active'
+                            : 'border-[#EEC77F]/25 text-[#FFF9EF]/76 hover:border-[#EEC77F] hover:text-[#EEC77F]'
+                        }`}
+                        onClick={() => setPendingFinish(option)}
                       >
-                        Borrar
+                        {option}
                       </button>
-                    ) : null}
-                  </div>
-                  <div className="grid gap-3">
-                    {catalogCoverageOptions.map((option) => {
-                      const isActive = pendingCoverage === option
-                      return (
-                        <button
-                          key={option}
-                          type="button"
-                          className={`catalog-filter border px-4 py-3 text-left font-heading text-[0.74rem] font-semibold uppercase tracking-[0.18em] transition ${
-                            isActive
-                              ? 'catalog-filter--active'
-                              : 'border-[#EEC77F]/25 text-[#FFF9EF]/76 hover:border-[#EEC77F] hover:text-[#EEC77F]'
-                          }`}
-                          onClick={() => setPendingCoverage(option)}
-                        >
-                          {option}
-                        </button>
-                      )
-                    })}
-                  </div>
-                </div>
-
-                <div className="catalog-panel__section">
-                  <div className="flex items-center justify-between gap-4">
-                    <p className="mb-3 font-heading text-[0.72rem] uppercase tracking-[0.3em] text-[#EEC77F]">
-                      Calificación
-                    </p>
-                    {pendingRating ? (
-                      <button
-                        type="button"
-                        className="catalog-panel__clear"
-                        onClick={clearRating}
-                      >
-                        Borrar
-                      </button>
-                    ) : null}
-                  </div>
-                  <div className="grid gap-3">
-                    {catalogRatingOptions.map((option) => {
-                      const isActive = pendingRating === option.value
-                      return (
-                        <button
-                          key={option.label}
-                          type="button"
-                          className={`catalog-filter border px-4 py-3 text-left font-heading text-[0.74rem] font-semibold uppercase tracking-[0.18em] transition ${
-                            isActive
-                              ? 'catalog-filter--active'
-                              : 'border-[#EEC77F]/25 text-[#FFF9EF]/76 hover:border-[#EEC77F] hover:text-[#EEC77F]'
-                          }`}
-                          onClick={() => setPendingRating(option.value)}
-                        >
-                          {option.label}
-                        </button>
-                      )
-                    })}
-                  </div>
+                    )
+                  })}
                 </div>
               </div>
-            </div>
 
-            <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-              <button
-                type="button"
-                className="catalog-panel__search-button"
-                onClick={applyFilterSearch}
-              >
-                Buscar filtros
-              </button>
-              <button
-                type="button"
-                className="catalog-panel__clear"
-                onClick={clearAllPendingFilters}
-              >
-                Limpiar selección
-              </button>
-            </div>
-            {hasAdvancedFilters ? (
-              <div className="mt-5 border-t border-[#EEC77F]/10 pt-5 text-sm text-[#FFF9EF]/75">
-                <p>
-                  Recomendado para: {appliedFilters.color ?? 'Cualquier color'} · {appliedFilters.finish ?? 'Cualquier acabado'} · {appliedFilters.coverage ?? 'Cualquier cobertura'} · {appliedFilters.rating ? `${appliedFilters.rating.toFixed(1)}+ estrellas` : 'Cualquier rating'}
-                </p>
+              <div className="catalog-panel__section">
+                <div className="flex items-center justify-between gap-4">
+                  <p className="mb-3 font-heading text-[0.72rem] uppercase tracking-[0.3em] text-[#EEC77F]">
+                    Cobertura
+                  </p>
+                  {pendingCoverage ? (
+                    <button
+                      type="button"
+                      className="catalog-panel__clear"
+                      onClick={clearCoverage}
+                    >
+                      Borrar
+                    </button>
+                  ) : null}
+                </div>
+                <div className="grid gap-3">
+                  {catalogCoverageOptions.map((option) => {
+                    const isActive = pendingCoverage === option
+                    return (
+                      <button
+                        key={option}
+                        type="button"
+                        className={`catalog-filter border px-4 py-3 text-left font-heading text-[0.74rem] font-semibold uppercase tracking-[0.18em] transition ${
+                          isActive
+                            ? 'catalog-filter--active'
+                            : 'border-[#EEC77F]/25 text-[#FFF9EF]/76 hover:border-[#EEC77F] hover:text-[#EEC77F]'
+                        }`}
+                        onClick={() => setPendingCoverage(option)}
+                      >
+                        {option}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+
+              <div className="catalog-panel__section">
+                <div className="flex items-center justify-between gap-4">
+                  <p className="mb-3 font-heading text-[0.72rem] uppercase tracking-[0.3em] text-[#EEC77F]">
+                    Calificación
+                  </p>
+                  {pendingRating ? (
+                    <button
+                      type="button"
+                      className="catalog-panel__clear"
+                      onClick={clearRating}
+                    >
+                      Borrar
+                    </button>
+                  ) : null}
+                </div>
+                <div className="grid gap-3">
+                  {catalogRatingOptions.map((option) => {
+                    const isActive = pendingRating === option.value
+                    return (
+                      <button
+                        key={option.label}
+                        type="button"
+                        className={`catalog-filter border px-4 py-3 text-left font-heading text-[0.74rem] font-semibold uppercase tracking-[0.18em] transition ${
+                          isActive
+                            ? 'catalog-filter--active'
+                            : 'border-[#EEC77F]/25 text-[#FFF9EF]/76 hover:border-[#EEC77F] hover:text-[#EEC77F]'
+                        }`}
+                        onClick={() => setPendingRating(option.value)}
+                      >
+                        {option.label}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+
+              <div className="col-span-4 mt-5 flex flex-wrap items-center justify-between gap-3">
+                <button
+                  type="button"
+                  className="catalog-panel__search-button"
+                  onClick={applyFilterSearch}
+                >
+                  Buscar filtros
+                </button>
                 <button
                   type="button"
                   className="catalog-panel__clear"
-                  onClick={clearAllAppliedFilters}
+                  onClick={clearAllPendingFilters}
                 >
-                  Limpiar filtros
+                  Limpiar selección
                 </button>
               </div>
-            ) : (
-              <div className="mt-5 border-t border-[#EEC77F]/10 pt-5 text-sm text-[#FFF9EF]/70">
-                Selecciona un color, acabado, cobertura o rating para ver recomendaciones personalizadas.
-              </div>
-            )}
-          </div>
-        )}
+              {hasAdvancedFilters ? (
+                <div className="col-span-4 mt-5 border-t border-[#EEC77F]/10 pt-5 text-sm text-[#FFF9EF]/75">
+                  <p>
+                    Recomendado para: {appliedFilters.color ?? 'Cualquier color'} · {appliedFilters.finish ?? 'Cualquier acabado'} · {appliedFilters.coverage ?? 'Cualquier cobertura'} · {appliedFilters.rating ? `${appliedFilters.rating.toFixed(1)}+ estrellas` : 'Cualquier rating'}
+                  </p>
+                  <button
+                    type="button"
+                    className="catalog-panel__clear mt-3"
+                    onClick={clearAllAppliedFilters}
+                  >
+                    Limpiar filtros
+                  </button>
+                </div>
+              ) : (
+                <div className="col-span-4 mt-5 border-t border-[#EEC77F]/10 pt-5 text-sm text-[#FFF9EF]/70">
+                  Selecciona un color, acabado, cobertura o rating para ver recomendaciones personalizadas.
+                </div>
+              )}
+            </div>
+          )}
 
         {showSortMenu && (
           <div className="catalog-panel mt-5">
