@@ -5,9 +5,6 @@ export function BrandPrinciples() {
     <section className="px-5 py-20 sm:px-8">
       <section className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.82fr_1.18fr]">
         <aside className="border-l border-[#EEC77F]/35 pl-6">
-          <p className="font-heading text-xs uppercase tracking-[0.38em] text-[#EEC77F]">
-            Marca
-          </p>
           <h2 className="mt-5 font-heading text-3xl uppercase tracking-[0.14em] sm:text-4xl">
             Negro absoluto, oro metalico, precision visual.
           </h2>

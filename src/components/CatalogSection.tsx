@@ -170,9 +170,6 @@ export function CatalogSection({
       <section className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="font-heading text-xs uppercase tracking-[0.38em] text-[#EEC77F]">
-              Catalogo
-            </p>
             <h2 className="mt-4 max-w-4xl font-heading text-3xl uppercase tracking-[0.12em] text-[#FFF9EF] sm:text-5xl">
               Maquillaje por linea, acabado y momento de uso.
             </h2>
