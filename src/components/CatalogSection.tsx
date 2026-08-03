@@ -231,6 +231,17 @@ export function CatalogSection({
 
         {showFilters && (
           <div className="catalog-panel mt-5 grid grid-cols-1 gap-4 md:grid-cols-4">
+            <div className="catalog-panel__header">
+              <span className="catalog-panel__header-label">Filtros</span>
+              <button
+                type="button"
+                className="catalog-panel__close"
+                onClick={() => setShowFilters(false)}
+                aria-label="Cerrar filtros"
+              >
+                ×
+              </button>
+            </div>
             <div className="catalog-panel__section">
                 <div className="flex items-center justify-between gap-4">
                   <p className="mb-3 font-heading text-[0.72rem] uppercase tracking-[0.3em] text-[#EEC77F]">
@@ -380,20 +391,20 @@ export function CatalogSection({
                 </div>
               </div>
 
-              <div className="col-span-4 mt-5 flex flex-wrap items-center justify-between gap-3">
+              <div className="col-span-4 mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <button
                   type="button"
                   className="catalog-panel__search-button"
                   onClick={applyFilterSearch}
                 >
-                  Buscar filtros
+                  Ver resultados
                 </button>
                 <button
                   type="button"
-                  className="catalog-panel__clear"
+                  className="catalog-panel__clear catalog-panel__clear--footer"
                   onClick={clearAllPendingFilters}
                 >
-                  Limpiar selección
+                  Borrar todo
                 </button>
               </div>
               {hasAdvancedFilters ? (
