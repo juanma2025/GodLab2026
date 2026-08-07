@@ -308,6 +308,13 @@ export function CatalogSection({
                 </span>
               </button>
               <div className={`catalog-panel__section-content ${expandedSection === 'finish' ? 'block' : 'hidden'} md:block`}>
+                {pendingFinish && (
+                  <div className="flex items-center justify-end mb-2">
+                    <button type="button" className="catalog-panel__clear" onClick={clearFinish}>
+                      Borrar
+                    </button>
+                  </div>
+                )}
                 <div className="grid gap-3">
                   {catalogFinishOptions.map((option) => {
                     const isActive = pendingFinish === option
@@ -343,6 +350,13 @@ export function CatalogSection({
                 </span>
               </button>
               <div className={`catalog-panel__section-content ${expandedSection === 'coverage' ? 'block' : 'hidden'} md:block`}>
+                {pendingCoverage && (
+                  <div className="flex items-center justify-end mb-2">
+                    <button type="button" className="catalog-panel__clear" onClick={clearCoverage}>
+                      Borrar
+                    </button>
+                  </div>
+                )}
                 <div className="grid gap-3">
                   {catalogCoverageOptions.map((option) => {
                     const isActive = pendingCoverage === option
@@ -378,6 +392,13 @@ export function CatalogSection({
                 </span>
               </button>
               <div className={`catalog-panel__section-content ${expandedSection === 'rating' ? 'block' : 'hidden'} md:block`}>
+                {pendingRating && (
+                  <div className="flex items-center justify-end mb-2">
+                    <button type="button" className="catalog-panel__clear" onClick={clearRating}>
+                      Borrar
+                    </button>
+                  </div>
+                )}
                 <div className="grid gap-3">
                   {catalogRatingOptions.map((option) => {
                     const isActive = pendingRating === option.value

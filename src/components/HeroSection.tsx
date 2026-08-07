@@ -21,8 +21,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
             GOD LAB
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-[#FFF9EF]/76 sm:text-xl">
-            Un laboratorio de belleza premium donde cada look se disena como
-            una pieza de presencia, brillo y precision editorial.
+            Belleza, calidad y prestigio en cada detalle. Diseñamos looks premium para la mujer que valora la excelencia, con el respaldo de una marca de referencia.
           </p>
           <nav
             className="mt-10 flex flex-col gap-4 sm:flex-row"

@@ -7,6 +7,7 @@ import { Header } from './components/Header'
 import { HeroSection } from './components/HeroSection'
 import { MethodSection } from './components/MethodSection'
 import { PortfolioLines } from './components/PortfolioLines'
+import { ScrollToTop } from './components/ScrollToTop'
 import type { CatalogFilter, CatalogSort } from './data/catalog'
 import type { PageId } from './data/navigation'
 
@@ -32,6 +33,7 @@ function App() {
   const [activeFilter, setActiveFilter] = useState<CatalogFilter>('Todos')
   const [activeSort, setActiveSort] = useState<CatalogSort>('En primer plano')
   const [isLightMode, setIsLightMode] = useState(false)
+  const [pageKey, setPageKey] = useState(0)
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -46,6 +48,7 @@ function App() {
   useEffect(() => {
     document.title = pageTitles[activePage]
     window.scrollTo({ top: 0, behavior: 'smooth' })
+    setPageKey((prev) => prev + 1)
   }, [activePage])
 
   useEffect(() => {
@@ -95,6 +98,10 @@ function App() {
 
   return (
     <div className={isLightMode ? 'theme-light' : 'theme-dark'}>
+      <a href="#main-content" className="skip-to-content">
+        Saltar al contenido principal
+      </a>
+
       <Header
         activePage={activePage}
         isLightMode={isLightMode}
@@ -102,9 +109,14 @@ function App() {
         onToggleTheme={() => setIsLightMode((currentMode) => !currentMode)}
       />
 
-      <main className="site-shell min-h-screen overflow-hidden">{renderPage()}</main>
+      <main id="main-content" className="site-shell min-h-screen overflow-hidden pt-20">
+        <div key={pageKey} className="page-enter">
+          {renderPage()}
+        </div>
+      </main>
 
-      <Footer />
+      <Footer onNavigate={handleNavigate} />
+      <ScrollToTop />
     </div>
   )
 }
