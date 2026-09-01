@@ -408,31 +408,85 @@ body.theme-light {
 
 .hero-visual {
   position: relative;
+  cursor: pointer;
 }
 
 .hero-visual__glow,
 .hero-visual__ring,
 .hero-visual__background,
 .hero-visual__logo {
-  transition: transform 300ms ease, opacity 300ms ease, box-shadow 300ms ease;
+  transition: all 600ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.hero-visual:hover .hero-visual__logo {
-  transform: scale(1.05);
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 30px rgba(238, 199, 127, 0.15);
+  }
+  50% {
+    transform: translateY(-12px);
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.5), 0 0 60px rgba(238, 199, 127, 0.3);
+  }
+}
+
+@keyframes spinRing1 {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes spinRing2 {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
 }
 
 .hero-visual__background {
   background: radial-gradient(circle, rgba(238, 199, 127, 0.22) 0%, rgba(119, 72, 39, 0.12) 40%, transparent 55%);
 }
 
+.hero-visual__glow {
+  border-top-color: transparent !important;
+  border-right-color: rgba(238, 199, 127, 0.6) !important;
+  animation: spinRing1 25s linear infinite;
+}
+
 .hero-visual__ring {
   border-color: rgba(238, 199, 127, 0.6);
+  border-left-color: transparent !important;
+  border-bottom-color: rgba(151, 108, 53, 0.8) !important;
   box-shadow: 0 0 0 1px rgba(238, 199, 127, 0.08);
+  animation: spinRing2 35s linear infinite;
 }
 
 .hero-visual__logo {
   object-fit: cover;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: logoFloat 6s ease-in-out infinite;
+  z-index: 10;
+}
+
+/* Hover Effects */
+.hero-visual:hover .hero-visual__logo {
+  animation-play-state: paused;
+  transform: scale(1.1);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 90px rgba(238, 199, 127, 0.5);
+  border-color: rgba(238, 199, 127, 0.9);
+}
+
+.hero-visual:hover .hero-visual__glow {
+  animation-duration: 8s;
+  transform: scale(1.05);
+  border-width: 2px;
+}
+
+.hero-visual:hover .hero-visual__ring {
+  animation-duration: 12s;
+  transform: scale(1.05);
+  border-width: 2px;
+}
+
+.hero-visual:hover .hero-visual__background {
+  opacity: 1;
+  transform: scale(1.1);
+  background: radial-gradient(circle, rgba(238, 199, 127, 0.35) 0%, rgba(119, 72, 39, 0.18) 45%, transparent 60%);
 }
 
 /* ===== CATALOG ===== */

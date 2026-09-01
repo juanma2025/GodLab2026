@@ -1,5 +1,4 @@
 import type { PageId } from '../data/navigation'
-import logo from '../assets/logo.png'
 
 type HeroSectionProps = {
   onNavigate: (page: PageId) => void
@@ -49,13 +48,48 @@ export function HeroSection({ onNavigate, onReserve }: HeroSectionProps) {
           <span className="hero-visual__glow absolute inset-5 rounded-full border border-[#EEC77F]/20" />
           <span className="hero-visual__ring absolute inset-12 rounded-full border border-[#976C35]/35" />
           <span className="hero-visual__background absolute inset-0 rounded-full opacity-85 shadow-[0_0_80px_rgba(151,108,53,0.25)]" />
-          <img
-            className="hero-visual__logo absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#EEC77F]/55 object-cover"
-            src={logo}
-            alt="Logo de GOD LAB"
-          />
+          <div className="hero-visual__logo absolute inset-0 m-auto flex h-56 w-56 items-center justify-center rounded-full border border-[#EEC77F]/55 bg-black shadow-[inset_0_0_20px_rgba(238,199,127,0.2)]">
+            <svg viewBox="0 0 200 200" className="h-48 w-48 drop-shadow-[0_0_10px_rgba(238,199,127,0.3)]" aria-label="Logo de GOD LAB">
+              <defs>
+                <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#FFF9EF" />
+                  <stop offset="30%" stopColor="#EEC77F" />
+                  <stop offset="70%" stopColor="#976C35" />
+                  <stop offset="100%" stopColor="#7B5527" />
+                </linearGradient>
+                <linearGradient id="goldGradientLight" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#976C35" />
+                  <stop offset="50%" stopColor="#EEC77F" />
+                  <stop offset="100%" stopColor="#FFF9EF" />
+                </linearGradient>
+              </defs>
+              
+              {/* Outer decorative ring */}
+              <circle cx="100" cy="100" r="92" fill="none" stroke="url(#goldGradient)" strokeWidth="1" strokeDasharray="4 4" opacity="0.6" />
+              <circle cx="100" cy="100" r="85" fill="none" stroke="url(#goldGradientLight)" strokeWidth="0.5" opacity="0.4" />
+              
+              {/* G and L monogram */}
+              <g transform="translate(0, 10)">
+                <text x="50%" y="45%" dominantBaseline="middle" textAnchor="middle" fill="url(#goldGradient)" fontFamily="Cinzel, serif" fontSize="82" fontWeight="400" letterSpacing="-2">
+                  G
+                </text>
+                <text x="50%" y="65%" dominantBaseline="middle" textAnchor="middle" fill="url(#goldGradientLight)" fontFamily="Cinzel, serif" fontSize="72" fontWeight="300" letterSpacing="-4" opacity="0.9">
+                  L
+                </text>
+              </g>
+
+              {/* Lab text */}
+              <text x="50%" y="85%" dominantBaseline="middle" textAnchor="middle" fill="url(#goldGradient)" fontFamily="Cinzel, serif" fontSize="14" fontWeight="600" letterSpacing="8" opacity="0.8">
+                LAB
+              </text>
+              
+              {/* Decorative stars */}
+              <path d="M 30,100 L 33,103 L 40,103 L 35,108 L 37,115 L 30,111 L 23,115 L 25,108 L 20,103 L 27,103 Z" fill="url(#goldGradientLight)" transform="scale(0.5) translate(20, 95)" opacity="0.7" />
+              <path d="M 30,100 L 33,103 L 40,103 L 35,108 L 37,115 L 30,111 L 23,115 L 25,108 L 20,103 L 27,103 Z" fill="url(#goldGradientLight)" transform="scale(0.5) translate(320, 95)" opacity="0.7" />
+            </svg>
+          </div>
           <figcaption className="sr-only">
-            Logo de GOD LAB dentro de un marco circular.
+            Logo de GOD LAB en formato vectorial interactivo.
           </figcaption>
         </figure>
       </section>
