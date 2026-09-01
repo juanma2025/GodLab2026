@@ -3,9 +3,10 @@ import logo from '../assets/logo.png'
 
 type HeroSectionProps = {
   onNavigate: (page: PageId) => void
+  onReserve: () => void
 }
 
-export function HeroSection({ onNavigate }: HeroSectionProps) {
+export function HeroSection({ onNavigate, onReserve }: HeroSectionProps) {
   return (
     <section id="inicio" className="hero-section relative isolate flex min-h-screen items-center px-5 pb-16 pt-28 sm:px-8">
       <span className="hero-section__background pointer-events-none absolute inset-0 -z-30 bg-[radial-gradient(circle_at_74%_22%,rgba(238,199,127,0.22),transparent_28%),linear-gradient(120deg,#000000_0%,#0A0A0A_45%,#000000_100%)]" />
@@ -30,7 +31,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
             <a
               className="hero-action hero-action--primary"
               href="#contacto"
-              onClick={() => onNavigate('contacto')}
+              onClick={onReserve}
             >
               Iniciar experiencia
             </a>
