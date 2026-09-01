@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { BrandPrinciples } from './components/BrandPrinciples'
 import { CatalogSection } from './components/CatalogSection'
 import { ContactSection } from './components/ContactSection'
+import type { ContactMode } from './components/ContactSection'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { HeroSection } from './components/HeroSection'
@@ -32,12 +33,18 @@ function App() {
   const [activePage, setActivePage] = useState<PageId>(getPageFromHash)
   const [activeFilter, setActiveFilter] = useState<CatalogFilter>('Todos')
   const [activeSort, setActiveSort] = useState<CatalogSort>('En primer plano')
+  const [contactMode, setContactMode] = useState<ContactMode>('contact')
   const [isLightMode, setIsLightMode] = useState(false)
   const [pageKey, setPageKey] = useState(0)
 
   useEffect(() => {
     const handleHashChange = () => {
-      setActivePage(getPageFromHash())
+      const nextPage = getPageFromHash()
+      setActivePage(nextPage)
+
+      if (nextPage === 'contacto') {
+        setContactMode('contact')
+      }
     }
 
     window.addEventListener('hashchange', handleHashChange)
@@ -57,8 +64,18 @@ function App() {
   }, [isLightMode])
 
   const handleNavigate = (page: PageId) => {
+    if (page === 'contacto') {
+      setContactMode('contact')
+    }
+
     setActivePage(page)
     window.history.pushState(null, '', `#${page}`)
+  }
+
+  const handleReserve = () => {
+    setContactMode('reservation')
+    setActivePage('contacto')
+    window.history.pushState(null, '', '#contacto')
   }
 
   const handleOpenCatalog = (filter: CatalogFilter = 'Todos') => {
@@ -89,10 +106,10 @@ function App() {
           />
         )
       case 'contacto':
-        return <ContactSection />
+        return <ContactSection mode={contactMode} onModeChange={setContactMode} />
       case 'inicio':
       default:
-        return <HeroSection onNavigate={handleNavigate} />
+        return <HeroSection onNavigate={handleNavigate} onReserve={handleReserve} />
     }
   }
 
@@ -106,6 +123,7 @@ function App() {
         activePage={activePage}
         isLightMode={isLightMode}
         onNavigate={handleNavigate}
+        onReserve={handleReserve}
         onToggleTheme={() => setIsLightMode((currentMode) => !currentMode)}
       />
 

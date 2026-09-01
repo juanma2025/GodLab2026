@@ -6,6 +6,7 @@ type HeaderProps = {
   activePage: PageId
   isLightMode: boolean
   onNavigate: (page: PageId) => void
+  onReserve: () => void
   onToggleTheme: () => void
 }
 
@@ -13,6 +14,7 @@ export function Header({
   activePage,
   isLightMode,
   onNavigate,
+  onReserve,
   onToggleTheme,
 }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -116,7 +118,10 @@ export function Header({
           <a
             className="reserve-cta-btn font-heading text-[0.68rem] font-semibold uppercase tracking-[0.2em] transition-all duration-200"
             href="#contacto"
-            onClick={() => handleNavigate('contacto')}
+            onClick={() => {
+              setMenuOpen(false)
+              onReserve()
+            }}
           >
             Reservar
           </a>
