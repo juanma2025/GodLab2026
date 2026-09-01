@@ -40,6 +40,9 @@ export type MethodStep = {
   value: string
   label: string
   description: string
+  icon: 'scan' | 'palette' | 'sparkle'
+  detail: string
+  tags: string[]
 }
 
 export const methodSteps: MethodStep[] = [
@@ -48,18 +51,30 @@ export const methodSteps: MethodStep[] = [
     label: 'Diagnostico estetico',
     description:
       'Lectura facial, analisis de tono de piel, estructura osea y estilo personal para definir la base del look.',
+    icon: 'scan',
+    detail:
+      'Cada rostro es unico. Analizamos morfologia, subtono, textura y personalidad para crear un mapa estetico que guiara todo el proceso.',
+    tags: ['Lectura facial', 'Analisis cromatico', 'Perfilado'],
   },
   {
     value: '02',
     label: 'Diseno de look',
     description:
       'Seleccion cromatica, intencion estetica y propuesta visual adaptada al contexto y la personalidad.',
+    icon: 'palette',
+    detail:
+      'Diseñamos la paleta, la intensidad y la narrativa visual. Cada look tiene un proposito claro: resaltar, elevar y comunicar.',
+    tags: ['Color strategy', 'Mood board', 'Propuesta visual'],
   },
   {
     value: '03',
     label: 'Ejecucion premium',
     description:
       'Aplicacion de alto detalle con productos de linea profesional, precision editorial y acabado impecable.',
+    icon: 'sparkle',
+    detail:
+      'Productos profesionales de alta gama, tecnicas de editorial y atencion obsesiva al detalle. El resultado: un acabado que impacta en persona y en camara.',
+    tags: ['Productos pro', 'Tecnica editorial', 'Acabado HD'],
   },
 ]
 
