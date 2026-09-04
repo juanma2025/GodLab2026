@@ -69,6 +69,7 @@ export type CatalogProduct = {
   popularity: number
   discount?: number
   isNew: boolean
+  inStock: boolean
 }
 
 export const catalogProducts: CatalogProduct[] = [
@@ -87,6 +88,7 @@ export const catalogProducts: CatalogProduct[] = [
     popularity: 86,
     discount: 15,
     isNew: false,
+    inStock: true,
   },
   {
     id: 'runway-gold',
@@ -103,6 +105,7 @@ export const catalogProducts: CatalogProduct[] = [
     popularity: 72,
     discount: 0,
     isNew: true,
+    inStock: false,
   },
   {
     id: 'bride-prestige',
@@ -119,6 +122,7 @@ export const catalogProducts: CatalogProduct[] = [
     popularity: 91,
     discount: 10,
     isNew: false,
+    inStock: true,
   },
   {
     id: 'soft-ceremony',
@@ -135,6 +139,7 @@ export const catalogProducts: CatalogProduct[] = [
     popularity: 64,
     discount: 0,
     isNew: true,
+    inStock: true,
   },
   {
     id: 'social-divinity',
@@ -151,6 +156,7 @@ export const catalogProducts: CatalogProduct[] = [
     popularity: 55,
     discount: 20,
     isNew: false,
+    inStock: true,
   },
   {
     id: 'night-prestige',
@@ -167,6 +173,7 @@ export const catalogProducts: CatalogProduct[] = [
     popularity: 78,
     discount: 5,
     isNew: false,
+    inStock: false,
   },
   {
     id: 'campaign-signature',
@@ -183,6 +190,7 @@ export const catalogProducts: CatalogProduct[] = [
     popularity: 48,
     discount: 0,
     isNew: true,
+    inStock: true,
   },
   {
     id: 'brand-beauty',
@@ -199,5 +207,6 @@ export const catalogProducts: CatalogProduct[] = [
     popularity: 52,
     discount: 25,
     isNew: false,
+    inStock: true,
   },
 ]
