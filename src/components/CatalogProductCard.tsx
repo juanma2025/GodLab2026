@@ -93,14 +93,14 @@ export function CatalogProductCard({ product }: CatalogProductCardProps) {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
           {/* Backdrop */}
           <div 
-            className="absolute inset-0 bg-black/80 backdrop-blur-md transition-opacity modal-backdrop-enter" 
+            className="catalog-modal__backdrop absolute inset-0 backdrop-blur-md transition-opacity modal-backdrop-enter" 
             onClick={() => setIsModalOpen(false)}
             aria-hidden="true"
           />
           
           {/* Modal Content */}
           <div 
-            className="relative w-full max-w-2xl overflow-hidden rounded-xl border border-[#EEC77F]/30 bg-[#0A0A0A] shadow-[0_30px_80px_rgba(0,0,0,0.8)] modal-content-enter"
+            className="catalog-modal relative w-full max-w-2xl overflow-hidden rounded-xl border shadow-[0_30px_80px_rgba(0,0,0,0.8)] modal-content-enter"
             role="dialog"
             aria-modal="true"
             aria-labelledby={`modal-title-${product.id}`}
@@ -108,7 +108,7 @@ export function CatalogProductCard({ product }: CatalogProductCardProps) {
             {/* Close Button */}
             <button
               onClick={() => setIsModalOpen(false)}
-              className="absolute right-4 top-4 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-[#FFF9EF]/70 hover:bg-[#EEC77F] hover:text-black transition-colors border border-[#EEC77F]/20"
+              className="catalog-modal__close absolute right-4 top-4 z-10 flex h-8 w-8 items-center justify-center rounded-full transition-colors border"
               aria-label="Cerrar modal"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -118,7 +118,7 @@ export function CatalogProductCard({ product }: CatalogProductCardProps) {
 
             <div className="grid md:grid-cols-2">
               {/* Image Section */}
-              <div className="relative aspect-square bg-[#EEC77F]/5 border-r border-[#EEC77F]/10">
+              <div className="catalog-modal__image-wrap relative aspect-square border-r">
                 {product.imageUrl ? (
                   <img
                     className="h-full w-full object-cover"
@@ -156,61 +156,61 @@ export function CatalogProductCard({ product }: CatalogProductCardProps) {
                   <p className="font-heading text-xs uppercase tracking-[0.2em] text-[#EEC77F]">
                     {product.category}
                   </p>
-                  <h2 id={`modal-title-${product.id}`} className="mt-2 font-heading text-2xl uppercase tracking-widest text-[#FFF9EF] drop-shadow-md">
+                  <h2 id={`modal-title-${product.id}`} className="catalog-modal__title mt-2 font-heading text-2xl uppercase tracking-widest drop-shadow-md">
                     {product.title}
                   </h2>
                   
-                  <div className="mt-4 border-t border-[#EEC77F]/10 pt-4">
-                    <p className="text-sm leading-relaxed text-[#FFF9EF]/80">
+                  <div className="catalog-modal__divider mt-4 border-t pt-4">
+                    <p className="catalog-modal__text text-sm leading-relaxed">
                       {product.description}
                     </p>
                   </div>
 
-                  <div className="mt-6 space-y-3 bg-[#EEC77F]/5 p-4 rounded-lg border border-[#EEC77F]/10">
+                  <div className="catalog-modal__panel mt-6 space-y-3 p-4 rounded-lg border">
                     <div className="flex justify-between text-sm">
-                      <span className="text-[#FFF9EF]/50">Cobertura:</span>
-                      <span className="font-semibold text-[#FFF9EF]">{product.coverage}</span>
+                      <span className="catalog-modal__label">Cobertura:</span>
+                      <span className="catalog-modal__value font-semibold">{product.coverage}</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-[#FFF9EF]/50">Acabado:</span>
-                      <span className="font-semibold text-[#FFF9EF]">{product.finishType}</span>
+                      <span className="catalog-modal__label">Acabado:</span>
+                      <span className="catalog-modal__value font-semibold">{product.finishType}</span>
                     </div>
                   </div>
 
                   {/* Colors Section */}
                   <div className="mt-6">
-                    <span className="block text-xs uppercase tracking-wider text-[#FFF9EF]/50 mb-3">Tonos Disponibles</span>
+                    <span className="catalog-modal__label block text-xs uppercase tracking-wider mb-3">Tonos Disponibles</span>
                     <div className="flex flex-wrap gap-2">
                       {product.colors.map(colorLabel => {
                         const colorInfo = catalogColorOptions.find(c => c.label === colorLabel)
                         return (
                           <div 
                             key={colorLabel}
-                            className="group relative flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-[#FFF9EF]/20 transition-all hover:scale-110 hover:border-[#EEC77F] hover:shadow-[0_0_10px_rgba(238,199,127,0.4)]"
+                            className="group relative flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-white/20 transition-all hover:scale-110 hover:border-[#EEC77F] hover:shadow-[0_0_10px_rgba(238,199,127,0.4)]"
                             style={{ backgroundColor: colorInfo?.color || '#333' }}
                             title={colorLabel}
                           >
-                            <span className="absolute -top-8 hidden whitespace-nowrap rounded bg-[#0A0A0A] px-2 py-1 text-[10px] text-white group-hover:block border border-[#EEC77F]/40 shadow-lg">
+                            <span className="catalog-modal__tooltip absolute -top-8 hidden whitespace-nowrap rounded px-2 py-1 text-[10px] group-hover:block border shadow-lg">
                               {colorLabel}
                             </span>
                           </div>
                         )
                       })}
                       {product.colors.length === 0 && (
-                        <span className="text-sm text-[#FFF9EF]/40 italic">Tono único</span>
+                        <span className="catalog-modal__label text-sm italic">Tono único</span>
                       )}
                     </div>
                   </div>
                 </div>
 
                 {/* Action CTA */}
-                <div className="mt-8 pt-4 border-t border-[#EEC77F]/10">
+                <div className="catalog-modal__divider mt-8 pt-4 border-t">
                   <button 
                     disabled={!product.inStock}
                     className={`w-full rounded-full py-3.5 font-heading text-sm font-bold uppercase tracking-widest transition-all ${
                       product.inStock 
-                        ? 'bg-gradient-to-r from-[#EEC77F] to-[#976C35] text-black shadow-lg shadow-[#EEC77F]/20 hover:scale-[1.02] hover:shadow-[#EEC77F]/40' 
-                        : 'cursor-not-allowed bg-[#222] text-[#666] opacity-60 border border-[#333]'
+                        ? 'catalog-modal__cta shadow-lg hover:scale-[1.02]' 
+                        : 'catalog-modal__cta--disabled cursor-not-allowed border'
                     }`}
                   >
                     {product.inStock ? 'Reservar look' : 'No disponible'}
