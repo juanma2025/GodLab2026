@@ -33,7 +33,7 @@ export function Header({
         {/* ZONA 1: Logo (Izquierda) */}
         <div className="flex items-center">
           <a
-            className="brand-link font-heading text-base font-bold uppercase tracking-[0.34em] transition-colors duration-200"
+            className="brand-link font-heading text-base font-semibold uppercase tracking-[0.14em] transition-colors duration-200"
             href="#inicio"
             onClick={() => handleNavigate('inicio')}
           >
@@ -42,7 +42,7 @@ export function Header({
         </div>
 
         {/* ZONA 2: Navegacion (Centro - Desktop) */}
-        <ul className="nav-links hidden items-center gap-6 lg:gap-9 font-heading text-[0.7rem] uppercase tracking-[0.2em] md:flex">
+        <ul className="nav-links hidden items-center gap-6 lg:gap-9 font-heading text-[0.7rem] uppercase tracking-[0.08em] md:flex">
           {navigationPages.map((page) => {
             const isActive = activePage === page.id
 
@@ -116,7 +116,7 @@ export function Header({
 
           {/* Boton RESERVAR: CTA Principal con fondo dorado solido, border-radius 6px, padding 10px 22px */}
           <a
-            className="reserve-cta-btn font-heading text-[0.68rem] font-semibold uppercase tracking-[0.2em] transition-all duration-200"
+            className="reserve-cta-btn font-heading text-[0.68rem] font-semibold uppercase tracking-[0.08em] transition-all duration-200"
             href="#contacto"
             onClick={() => {
               setMenuOpen(false)
@@ -152,7 +152,7 @@ export function Header({
           className={`mobile-menu-panel ${isLightMode ? 'mobile-menu-panel--light' : ''} border-t md:hidden`}
         >
           <div className="mx-auto flex max-w-7xl flex-col gap-5 px-5 py-6 sm:px-8">
-            <ul className="flex flex-col gap-4 font-heading text-xs uppercase tracking-[0.22em]">
+            <ul className="flex flex-col gap-4 font-heading text-xs uppercase tracking-[0.08em]">
               {navigationPages.map((page) => (
                 <li key={page.id}>
                   <button

@@ -44,10 +44,10 @@ export function BrandPrinciples() {
       <div className="mx-auto max-w-7xl">
         <header className="mb-14 grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
           <div className="border-l-2 border-[#EEC77F] pl-6">
-            <p className="font-heading text-xs uppercase tracking-[0.42em] text-[#EEC77F]">
+            <p className="font-heading text-xs font-medium uppercase tracking-[0.18em] text-[#EEC77F]">
               Filosofia de Marca
             </p>
-            <h2 className="mt-3 font-heading text-3xl uppercase tracking-[0.14em] sm:text-5xl">
+            <h2 className="mt-3 font-heading text-3xl font-bold uppercase tracking-[0.02em] sm:text-5xl">
               Negro absoluto, oro metalico, precision visual.
             </h2>
           </div>

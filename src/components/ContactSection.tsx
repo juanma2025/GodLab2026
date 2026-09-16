@@ -66,10 +66,10 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
     <section id="contacto" className="scroll-mt-24 px-5 py-20 sm:px-8">
       <div className="mx-auto max-w-7xl">
         <header className="mb-12 text-center">
-          <p className="font-heading text-xs uppercase tracking-[0.42em] text-[#EEC77F]">
+          <p className="font-heading text-xs font-medium uppercase tracking-[0.18em] text-[#EEC77F]">
             GOD LAB Atención
           </p>
-          <h2 className="mt-4 font-heading text-3xl uppercase tracking-[0.14em] sm:text-5xl">
+          <h2 className="mt-4 font-heading text-3xl font-bold uppercase tracking-[0.02em] sm:text-5xl">
             Contacto y reservas
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-[#FFF9EF]/70">
@@ -80,7 +80,7 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
           {/* Information Column */}
           <div className="contact-card border border-[#EEC77F]/35 p-8 sm:p-10 shadow-[0_0_80px_rgba(123,85,39,0.15)] rounded-2xl">
-            <h3 className="font-heading text-xl uppercase tracking-[0.18em] text-[#EEC77F] mb-6">
+            <h3 className="font-heading text-xl font-semibold uppercase tracking-[0.08em] text-[#EEC77F] mb-6">
               Informacion de contacto
             </h3>
 
@@ -93,7 +93,7 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-heading text-xs uppercase tracking-[0.2em] text-[#EEC77F]">Correo / Gmail</p>
+                  <p className="font-heading text-xs uppercase tracking-[0.08em] text-[#EEC77F]">Correo / Gmail</p>
                   <a
                     href="https://mail.google.com/mail/?view=cm&fs=1&to=goblab2026%40gmail.com"
                     target="_blank"
@@ -113,7 +113,7 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-heading text-xs uppercase tracking-[0.2em] text-[#EEC77F]">Telefono / WhatsApp</p>
+                  <p className="font-heading text-xs uppercase tracking-[0.08em] text-[#EEC77F]">Telefono / WhatsApp</p>
                   <a
                     href="https://wa.me/573024993023?text=Hola%20GOD%20LAB%2C%20quiero%20recibir%20informaci%C3%B3n."
                     target="_blank"
@@ -135,7 +135,7 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-heading text-xs uppercase tracking-[0.2em] text-[#EEC77F]">Instagram</p>
+                  <p className="font-heading text-xs uppercase tracking-[0.08em] text-[#EEC77F]">Instagram</p>
                   <a
                     href="https://www.instagram.com/godlab_oficial/"
                     target="_blank"
@@ -154,7 +154,7 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-heading text-xs uppercase tracking-[0.2em] text-[#EEC77F]">TikTok</p>
+                  <p className="font-heading text-xs uppercase tracking-[0.08em] text-[#EEC77F]">TikTok</p>
                   <a
                     href="https://www.tiktok.com/@godlab_oficial"
                     target="_blank"
@@ -172,7 +172,7 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
           <div className="contact-card border border-[#EEC77F]/35 p-8 sm:p-10 shadow-[0_0_80px_rgba(123,85,39,0.15)] rounded-2xl">
             <div className="mb-6">
               <p className="contact-form-kicker">¿Cómo podemos ayudarte?</p>
-              <h3 className="mt-2 font-heading text-xl uppercase tracking-[0.16em] text-[#EEC77F]">
+              <h3 className="mt-2 font-heading text-xl font-semibold uppercase tracking-[0.06em] text-[#EEC77F]">
                 {isReservation ? 'Agenda tu asesoría' : 'Habla con nosotros'}
               </h3>
             </div>
@@ -215,7 +215,7 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </div>
-                <h3 className="font-heading text-2xl uppercase tracking-[0.14em] text-[#EEC77F]">
+                <h3 className="font-heading text-2xl font-bold uppercase tracking-[0.04em] text-[#EEC77F]">
                   Solicitud preparada
                 </h3>
                 <p className="mt-4 text-base text-[#FFF9EF]/80">
@@ -256,7 +256,7 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
                 </p>
 
                 <div>
-                  <label htmlFor="contact-name" className="block mb-2 font-heading text-xs uppercase tracking-[0.2em] text-[#EEC77F]">
+                  <label htmlFor="contact-name" className="block mb-2 font-heading text-xs uppercase tracking-[0.08em] text-[#EEC77F]">
                     Nombre completo <span aria-hidden="true">*</span>
                   </label>
                   <input
@@ -272,7 +272,7 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="contact-email" className="block mb-2 font-heading text-xs uppercase tracking-[0.2em] text-[#EEC77F]">
+                    <label htmlFor="contact-email" className="block mb-2 font-heading text-xs uppercase tracking-[0.08em] text-[#EEC77F]">
                       Email <span aria-hidden="true">*</span>
                     </label>
                     <input
@@ -287,7 +287,7 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
                   </div>
 
                   <div>
-                    <label htmlFor="contact-phone" className="block mb-2 font-heading text-xs uppercase tracking-[0.2em] text-[#EEC77F]">
+                    <label htmlFor="contact-phone" className="block mb-2 font-heading text-xs uppercase tracking-[0.08em] text-[#EEC77F]">
                       Teléfono {isReservation ? <span aria-hidden="true">*</span> : null}
                     </label>
                     <input
@@ -305,7 +305,7 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
                 {isReservation ? (
                   <>
                     <div>
-                      <label htmlFor="reservation-service" className="block mb-2 font-heading text-xs uppercase tracking-[0.2em] text-[#EEC77F]">
+                      <label htmlFor="reservation-service" className="block mb-2 font-heading text-xs uppercase tracking-[0.08em] text-[#EEC77F]">
                         Tipo de asesoría <span aria-hidden="true">*</span>
                       </label>
                       <select id="reservation-service" name="service" required defaultValue="" className="contact-select">
@@ -320,13 +320,13 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
 
                     <div className="grid gap-4 sm:grid-cols-2">
                       <div>
-                        <label htmlFor="reservation-date" className="block mb-2 font-heading text-xs uppercase tracking-[0.2em] text-[#EEC77F]">
+                        <label htmlFor="reservation-date" className="block mb-2 font-heading text-xs uppercase tracking-[0.08em] text-[#EEC77F]">
                           Fecha <span aria-hidden="true">*</span>
                         </label>
                         <input id="reservation-date" name="date" type="date" required className="contact-input" />
                       </div>
                       <div>
-                        <label htmlFor="reservation-time" className="block mb-2 font-heading text-xs uppercase tracking-[0.2em] text-[#EEC77F]">
+                        <label htmlFor="reservation-time" className="block mb-2 font-heading text-xs uppercase tracking-[0.08em] text-[#EEC77F]">
                           Hora <span aria-hidden="true">*</span>
                         </label>
                         <input id="reservation-time" name="time" type="time" required className="contact-input" />
@@ -335,7 +335,7 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
                   </>
                 ) : (
                   <div>
-                    <label htmlFor="contact-subject" className="block mb-2 font-heading text-xs uppercase tracking-[0.2em] text-[#EEC77F]">
+                    <label htmlFor="contact-subject" className="block mb-2 font-heading text-xs uppercase tracking-[0.08em] text-[#EEC77F]">
                       Motivo de la consulta <span aria-hidden="true">*</span>
                     </label>
                     <select id="contact-subject" name="subject" required defaultValue="" className="contact-select">
@@ -349,7 +349,7 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
                 )}
 
                 <div>
-                  <label htmlFor="contact-message" className="block mb-2 font-heading text-xs uppercase tracking-[0.2em] text-[#EEC77F]">
+                  <label htmlFor="contact-message" className="block mb-2 font-heading text-xs uppercase tracking-[0.08em] text-[#EEC77F]">
                     {isReservation ? 'Comentarios adicionales' : 'Mensaje'}{' '}
                     {!isReservation ? <span aria-hidden="true">*</span> : null}
                   </label>

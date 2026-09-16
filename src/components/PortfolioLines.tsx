@@ -81,7 +81,7 @@ export function PortfolioLines({
             </p>
             <span className="portfolio-header__accent-line" />
           </div>
-          <h2 className="portfolio-header__title mt-4 font-heading text-4xl uppercase tracking-[0.14em] sm:text-5xl">
+          <h2 className="portfolio-header__title mt-4 font-heading text-4xl font-bold uppercase tracking-[0.04em] sm:text-5xl">
             Líneas de Portafolio
           </h2>
           <p className="portfolio-header__subtitle mx-auto mt-5 max-w-2xl text-lg text-[#FFF9EF]/68">
@@ -115,7 +115,7 @@ export function PortfolioLines({
                     <div className="portfolio-card__icon-wrapper mb-6">
                       <CategoryIcon category={line} />
                     </div>
-                    <h3 className="portfolio-card__title font-heading text-lg uppercase tracking-[0.2em] transition-colors duration-300">
+                    <h3 className="portfolio-card__title font-heading text-lg font-semibold uppercase tracking-[0.08em] transition-colors duration-300">
                       {line}
                     </h3>
                   </div>

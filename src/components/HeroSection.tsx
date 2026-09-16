@@ -14,10 +14,10 @@ export function HeroSection({ onNavigate, onReserve }: HeroSectionProps) {
 
       <section className="mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-[1.02fr_0.98fr]">
         <article className="max-w-3xl">
-          <p className="font-heading text-xs uppercase tracking-[0.42em] text-[#EEC77F]">
+          <p className="font-heading text-xs font-medium uppercase tracking-[0.18em] text-[#EEC77F]">
             Prestige / Exclusividad / Beauty / Divinity / Makeup
           </p>
-          <h1 className="mt-7 bg-[linear-gradient(135deg,#7B5527_0%,#976C35_34%,#EEC77F_72%,#FFF9EF_100%)] bg-clip-text font-heading text-5xl font-semibold uppercase leading-[0.95] tracking-[0.16em] text-transparent sm:text-7xl lg:text-8xl [-webkit-text-stroke:1px_rgba(238,199,127,0.38)]">
+          <h1 className="mt-7 bg-[linear-gradient(135deg,#7B5527_0%,#976C35_34%,#EEC77F_72%,#FFF9EF_100%)] bg-clip-text font-heading text-5xl font-extrabold uppercase leading-[0.95] tracking-[0.04em] text-transparent sm:text-7xl lg:text-8xl">
             GOD LAB
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-[#FFF9EF]/76 sm:text-xl">
@@ -70,16 +70,16 @@ export function HeroSection({ onNavigate, onReserve }: HeroSectionProps) {
               
               {/* G and L monogram */}
               <g transform="translate(0, 10)">
-                <text x="50%" y="45%" dominantBaseline="middle" textAnchor="middle" fill="url(#goldGradient)" fontFamily="Cinzel, serif" fontSize="82" fontWeight="400" letterSpacing="-2">
+                <text x="50%" y="45%" dominantBaseline="middle" textAnchor="middle" fill="url(#goldGradient)" fontFamily="Inter, sans-serif" fontSize="82" fontWeight="800" letterSpacing="-2">
                   G
                 </text>
-                <text x="50%" y="65%" dominantBaseline="middle" textAnchor="middle" fill="url(#goldGradientLight)" fontFamily="Cinzel, serif" fontSize="72" fontWeight="300" letterSpacing="-4" opacity="0.9">
+                <text x="50%" y="65%" dominantBaseline="middle" textAnchor="middle" fill="url(#goldGradientLight)" fontFamily="Inter, sans-serif" fontSize="72" fontWeight="300" letterSpacing="-4" opacity="0.9">
                   L
                 </text>
               </g>
 
               {/* Lab text */}
-              <text x="50%" y="85%" dominantBaseline="middle" textAnchor="middle" fill="url(#goldGradient)" fontFamily="Cinzel, serif" fontSize="14" fontWeight="600" letterSpacing="8" opacity="0.8">
+              <text x="50%" y="85%" dominantBaseline="middle" textAnchor="middle" fill="url(#goldGradient)" fontFamily="Inter, sans-serif" fontSize="14" fontWeight="600" letterSpacing="8" opacity="0.8">
                 LAB
               </text>
               
