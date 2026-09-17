@@ -95,13 +95,13 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
                 <div>
                   <p className="font-heading text-xs uppercase tracking-[0.08em] text-[#EEC77F]">Correo / Gmail</p>
                   <a
-                    href="https://mail.google.com/mail/?view=cm&fs=1&to=goblab2026%40gmail.com"
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=goblab280%40gmail.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Escribir a GOD LAB en Gmail"
                     className="text-base text-[#FFF9EF]/90 hover:text-[#EEC77F] transition"
                   >
-                    goblab2026@gmail.com
+                    goblab280@gmail.com
                   </a>
                 </div>
               </div>
@@ -115,13 +115,13 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
                 <div>
                   <p className="font-heading text-xs uppercase tracking-[0.08em] text-[#EEC77F]">Telefono / WhatsApp</p>
                   <a
-                    href="https://wa.me/573024993023?text=Hola%20GOD%20LAB%2C%20quiero%20recibir%20informaci%C3%B3n."
+                    href="https://wa.me/573054834087?text=Hola%20GOD%20LAB%2C%20quiero%20recibir%20informaci%C3%B3n."
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Contactar a GOD LAB por WhatsApp"
                     className="text-base text-[#FFF9EF]/90 hover:text-[#EEC77F] transition"
                   >
-                    +57 302 499 3023
+                    +57 305-483-4087
                   </a>
                 </div>
               </div>

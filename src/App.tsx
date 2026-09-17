@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { BrandPrinciples } from './components/BrandPrinciples'
 import { CatalogSection } from './components/CatalogSection'
 import { ContactSection } from './components/ContactSection'
 import type { ContactMode } from './components/ContactSection'
@@ -15,7 +14,6 @@ import type { PageId } from './data/navigation'
 const pageTitles: Record<PageId, string> = {
   inicio: 'GOD LAB',
   catalogo: 'Catalogo / GOD LAB',
-  marca: 'Marca / GOD LAB',
   metodo: 'Metodo / GOD LAB',
   portafolio: 'Portafolio / GOD LAB',
   contacto: 'Contacto / GOD LAB',
@@ -94,8 +92,6 @@ function App() {
             onSelectSort={setActiveSort}
           />
         )
-      case 'marca':
-        return <BrandPrinciples />
       case 'metodo':
         return <MethodSection />
       case 'portafolio':

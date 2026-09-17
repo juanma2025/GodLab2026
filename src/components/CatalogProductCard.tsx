@@ -58,7 +58,7 @@ export function CatalogProductCard({ product }: CatalogProductCardProps) {
           <button 
             type="button"
             onClick={() => setIsModalOpen(true)}
-            className="catalog-card__overlay absolute inset-x-4 bottom-4 translate-y-2 border px-4 py-3 text-center font-heading text-[0.62rem] font-semibold uppercase tracking-[0.2em] opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:bg-[#EEC77F] hover:text-black hover:border-transparent"
+            className="catalog-card__overlay absolute inset-x-4 bottom-4 translate-y-2 border px-4 py-3 text-center font-heading text-[0.62rem] font-semibold uppercase tracking-[0.2em] opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:bg-[#EEC77F] hover:text-[#3D1C1D] hover:border-transparent"
           >
             Ver producto
           </button>

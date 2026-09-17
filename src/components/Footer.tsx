@@ -44,7 +44,7 @@ export function Footer({ onNavigate }: FooterProps) {
             </a>
             <a
               className="footer-social-link"
-              href="https://wa.me/1234567890"
+              href="https://wa.me/3054834087"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"
@@ -85,13 +85,12 @@ export function Footer({ onNavigate }: FooterProps) {
         {/* Contact column */}
         <div>
           <p className="footer-heading">Contacto</p>
-          <a className="footer-link" href="mailto:contacto@godlab.com">
-            contacto@godlab.com
+          <a className="footer-link" href="mailto:[Godlab280@gmail.com]">
+            Godlab280@gmail.com
           </a>
-          <a className="footer-link" href="tel:+521234567890">
-            +52 (123) 456 7890
+          <a className="footer-link" href="tel:+305-483-4087">
+            +57 305-483-4087
           </a>
-          <span className="footer-link">Lun — Sab / 9:00 — 19:00</span>
         </div>
       </div>
 

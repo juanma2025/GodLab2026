@@ -8,19 +8,19 @@ type HeroSectionProps = {
 export function HeroSection({ onNavigate, onReserve }: HeroSectionProps) {
   return (
     <section id="inicio" className="hero-section relative isolate flex min-h-screen items-center px-5 pb-16 pt-28 sm:px-8">
-      <span className="hero-section__background pointer-events-none absolute inset-0 -z-30 bg-[radial-gradient(circle_at_74%_22%,rgba(238,199,127,0.22),transparent_28%),linear-gradient(120deg,#000000_0%,#0A0A0A_45%,#000000_100%)]" />
-      <span className="hero-section__glow pointer-events-none absolute right-[-18rem] top-20 -z-20 h-[42rem] w-[42rem] rounded-full border border-[#EEC77F]/15 bg-[conic-gradient(from_120deg,transparent,#7B5527,#EEC77F,#976C35,transparent)] opacity-40 blur-[1px]" />
-      <span className="hero-section__ring pointer-events-none absolute bottom-[-14rem] left-1/2 -z-20 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full border border-[#976C35]/25" />
+      <span className="hero-section__background pointer-events-none absolute inset-0 -z-30 bg-[radial-gradient(circle_at_30%_0%,rgba(255,255,255,0.15),transparent_45%),linear-gradient(120deg,#3D1C1D_0%,#2B1314_50%,#180A0B_100%)]" />
+      <span className="hero-section__glow pointer-events-none absolute right-[-18rem] top-20 -z-20 h-[42rem] w-[42rem] rounded-full border border-white/20 bg-[conic-gradient(from_120deg,transparent,rgba(255,255,255,0.8),rgba(255,255,255,0.4),rgba(255,255,255,0.8),transparent)] opacity-25 blur-[4px]" />
+      <span className="hero-section__ring pointer-events-none absolute bottom-[-14rem] left-1/2 -z-20 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full border border-white/15" />
 
       <section className="mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-[1.02fr_0.98fr]">
         <article className="max-w-3xl">
-          <p className="font-heading text-xs font-medium uppercase tracking-[0.18em] text-[#EEC77F]">
+          <p className="font-heading text-xs font-medium uppercase tracking-[0.18em] text-white/80">
             Prestige / Exclusividad / Beauty / Divinity / Makeup
           </p>
-          <h1 className="mt-7 bg-[linear-gradient(135deg,#7B5527_0%,#976C35_34%,#EEC77F_72%,#FFF9EF_100%)] bg-clip-text font-heading text-5xl font-extrabold uppercase leading-[0.95] tracking-[0.04em] text-transparent sm:text-7xl lg:text-8xl">
+          <h1 className="mt-7 bg-[linear-gradient(135deg,#7B5527_0%,#976C35_34%,#EEC77F_65%,#FFFFFF_100%)] bg-clip-text font-heading text-5xl font-extrabold uppercase leading-[0.95] tracking-[0.04em] text-transparent sm:text-7xl lg:text-8xl">
             GOD LAB
           </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-[#FFF9EF]/76 sm:text-xl">
+          <p className="mt-7 max-w-2xl text-lg leading-8 text-white/85 sm:text-xl">
             Belleza, calidad y prestigio en cada detalle. Diseñamos looks premium para la mujer que valora la excelencia, con el respaldo de una marca de referencia.
           </p>
           <nav
@@ -45,10 +45,10 @@ export function HeroSection({ onNavigate, onReserve }: HeroSectionProps) {
         </article>
 
         <figure className="hero-visual relative mx-auto aspect-square w-full max-w-136">
-          <span className="hero-visual__glow absolute inset-5 rounded-full border border-[#EEC77F]/20" />
-          <span className="hero-visual__ring absolute inset-12 rounded-full border border-[#976C35]/35" />
-          <span className="hero-visual__background absolute inset-0 rounded-full opacity-85 shadow-[0_0_80px_rgba(151,108,53,0.25)]" />
-          <div className="hero-visual__logo absolute inset-0 m-auto flex h-56 w-56 items-center justify-center rounded-full border border-[#EEC77F]/55 bg-black shadow-[inset_0_0_20px_rgba(238,199,127,0.2)]">
+          <span className="hero-visual__glow absolute inset-5 rounded-full border border-white/20" />
+          <span className="hero-visual__ring absolute inset-12 rounded-full border border-white/35" />
+          <span className="hero-visual__background absolute inset-0 rounded-full opacity-85 shadow-[0_0_80px_rgba(255,255,255,0.15)]" />
+          <div className="hero-visual__logo absolute inset-0 m-auto flex h-56 w-56 items-center justify-center rounded-full border border-white/55 bg-[#3D1C1D] shadow-[inset_0_0_30px_rgba(255,255,255,0.2)]">
             <svg viewBox="0 0 200 200" className="h-48 w-48 drop-shadow-[0_0_10px_rgba(238,199,127,0.3)]" aria-label="Logo de GOD LAB">
               <defs>
                 <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
