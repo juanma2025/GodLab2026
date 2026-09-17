@@ -85,7 +85,7 @@ export function Footer({ onNavigate }: FooterProps) {
         {/* Contact column */}
         <div>
           <p className="footer-heading">Contacto</p>
-          <a className="footer-link" href="mailto:[Godlab280@gmail.com]">
+          <a className="footer-link" href="mailto:Godlab280@gmail.com">
             Godlab280@gmail.com
           </a>
           <a className="footer-link" href="tel:+305-483-4087">

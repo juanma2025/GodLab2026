@@ -2078,6 +2078,38 @@ body.theme-light {
   flex-shrink: 0;
 }
 
+/* Sending spinner animation */
+@keyframes contact-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.contact-spinner {
+  animation: contact-spin 0.8s linear infinite;
+}
+
+.contact-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.contact-submit:disabled:hover {
+  transform: none;
+  box-shadow: 0 6px 20px rgba(238, 199, 127, 0.2);
+}
+
+/* Success icon pulse */
+@keyframes contact-success-pulse {
+  0% { transform: scale(0.7); opacity: 0; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.contact-success-icon {
+  animation: contact-success-pulse 0.5s ease-out forwards;
+}
+
 @media (max-width: 480px) {
   .contact-card {
     padding: 1.5rem;

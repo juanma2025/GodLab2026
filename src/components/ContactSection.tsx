@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 export type ContactMode = 'contact' | 'reservation'
 
@@ -7,60 +7,91 @@ type ContactSectionProps = {
   onModeChange: (mode: ContactMode) => void
 }
 
+// Web3Forms API key — replace with your actual key from https://web3forms.com
+const WEB3FORMS_KEY = 'e1d3dfd1-ad7e-45ea-81b8-03a4961dec0b'
+
+type FormStatus = 'idle' | 'sending' | 'success' | 'error'
+
 export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
-  const [submittedMode, setSubmittedMode] = useState<ContactMode | null>(null)
-  const [gmailDraftUrl, setGmailDraftUrl] = useState('')
+  const [status, setStatus] = useState<FormStatus>('idle')
+  const [statusMode, setStatusMode] = useState<ContactMode>('contact')
+  const formRef = useRef<HTMLFormElement>(null)
   const isReservation = mode === 'reservation'
-  const submitted = submittedMode === mode
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setStatus('sending')
+    setStatusMode(mode)
 
-    const formData = new FormData(e.currentTarget)
-    const getValue = (field: string) => String(formData.get(field) ?? '').trim()
-    const requestSelect = e.currentTarget.elements.namedItem(
+    const form = e.currentTarget
+    const formData = new FormData(form)
+
+    // Get readable text for select fields
+    const requestSelect = form.elements.namedItem(
       isReservation ? 'service' : 'subject',
     ) as HTMLSelectElement | null
     const requestType = requestSelect?.selectedOptions[0]?.text ?? ''
+
+    const getValue = (field: string) => String(formData.get(field) ?? '').trim()
     const name = getValue('name')
-    const message = getValue('message')
-    const subject = isReservation
-      ? `Solicitud de reserva - ${name}`
-      : `Consulta desde GOD LAB - ${name}`
-    const body = [
-      `Tipo de solicitud: ${isReservation ? 'Reserva de asesoría' : 'Consulta'}`,
-      `Nombre: ${name}`,
-      `Email: ${getValue('email')}`,
-      `Teléfono: ${getValue('phone') || 'No proporcionado'}`,
-      `${isReservation ? 'Tipo de asesoría' : 'Motivo'}: ${requestType}`,
-      isReservation ? `Fecha: ${getValue('date')}` : '',
-      isReservation ? `Hora: ${getValue('time')}` : '',
-      `Mensaje: ${message || 'Sin comentarios adicionales'}`,
+
+    // Build a structured message body for the email
+    const emailBody = [
+      `📋 Tipo de solicitud: ${isReservation ? 'Reserva de asesoría' : 'Consulta'}`,
+      `👤 Nombre: ${name}`,
+      `📧 Email: ${getValue('email')}`,
+      `📞 Teléfono: ${getValue('phone') || 'No proporcionado'}`,
+      `${isReservation ? '💄 Tipo de asesoría' : '📝 Motivo'}: ${requestType}`,
+      isReservation ? `📅 Fecha: ${getValue('date')}` : '',
+      isReservation ? `🕐 Hora: ${getValue('time')}` : '',
+      `💬 Mensaje: ${getValue('message') || 'Sin comentarios adicionales'}`,
     ].filter(Boolean).join('\n')
-    const gmailParams = new URLSearchParams({
-      view: 'cm',
-      fs: '1',
-      to: 'goblab2026@gmail.com',
-      su: subject,
-      body,
-    })
 
-    const draftUrl = `https://mail.google.com/mail/?${gmailParams.toString()}`
+    // Prepare Web3Forms payload
+    const payload = new FormData()
+    payload.append('access_key', WEB3FORMS_KEY)
+    payload.append('subject', isReservation
+      ? `🗓️ Solicitud de reserva — ${name}`
+      : `✉️ Consulta desde GOD LAB — ${name}`)
+    payload.append('from_name', `GOD LAB Web — ${name}`)
+    payload.append('message', emailBody)
+    // Include reply-to so you can respond directly
+    payload.append('replyto', getValue('email'))
+    // Honeypot for spam protection
+    payload.append('botcheck', '')
 
-    setGmailDraftUrl(draftUrl)
-    window.open(
-      draftUrl,
-      '_blank',
-      'noopener,noreferrer',
-    )
-    setSubmittedMode(mode)
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: payload,
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        setStatus('success')
+        formRef.current?.reset()
+      } else {
+        console.error('Web3Forms error:', data)
+        setStatus('error')
+      }
+    } catch (err) {
+      console.error('Network error:', err)
+      setStatus('error')
+    }
   }
 
   const handleModeChange = (nextMode: ContactMode) => {
-    setSubmittedMode(null)
-    setGmailDraftUrl('')
+    if (status === 'sending') return // don't switch while sending
+    setStatus('idle')
     onModeChange(nextMode)
   }
+
+  const handleReset = () => {
+    setStatus('idle')
+  }
+
+  const showResult = (status === 'success' || status === 'error') && statusMode === mode
 
   return (
     <section id="contacto" className="scroll-mt-24 px-5 py-20 sm:px-8">
@@ -95,13 +126,11 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
                 <div>
                   <p className="font-heading text-xs uppercase tracking-[0.08em] text-[#EEC77F]">Correo / Gmail</p>
                   <a
-                    href="https://mail.google.com/mail/?view=cm&fs=1&to=goblab280%40gmail.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Escribir a GOD LAB en Gmail"
+                    href="mailto:Godlab280@gmail.com"
+                    aria-label="Escribir a GOD LAB por correo"
                     className="text-base text-[#FFF9EF]/90 hover:text-[#EEC77F] transition"
                   >
-                    goblab280@gmail.com
+                    Godlab280@gmail.com
                   </a>
                 </div>
               </div>
@@ -202,7 +231,7 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
               </button>
             </div>
 
-            {submitted ? (
+            {showResult ? (
               <div
                 id="contact-request-panel"
                 role="tabpanel"
@@ -210,41 +239,68 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
                 aria-live="polite"
                 className="py-12 text-center"
               >
-                <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-[#EEC77F] bg-[#EEC77F]/10 text-[#EEC77F]">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </div>
-                <h3 className="font-heading text-2xl font-bold uppercase tracking-[0.04em] text-[#EEC77F]">
-                  Solicitud preparada
-                </h3>
-                <p className="mt-4 text-base text-[#FFF9EF]/80">
-                  Abrimos Gmail con tus datos y el destinatario listos. Revisa el mensaje y pulsa Enviar para completar tu solicitud.
-                </p>
-                <div className="mt-8 flex flex-col items-center gap-4">
-                  <a
-                    href={gmailDraftUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="contact-submit"
-                  >
-                    Abrir Gmail nuevamente
-                  </a>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSubmittedMode(null)
-                      setGmailDraftUrl('')
-                    }}
-                    className="contact-secondary-action"
-                  >
-                    {isReservation ? 'Solicitar otra reserva' : 'Enviar otra consulta'}
-                  </button>
-                </div>
+                {status === 'success' ? (
+                  <>
+                    <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-[#EEC77F] bg-[#EEC77F]/10 text-[#EEC77F] contact-success-icon">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </div>
+                    <h3 className="font-heading text-2xl font-bold uppercase tracking-[0.04em] text-[#EEC77F]">
+                      ¡Solicitud enviada!
+                    </h3>
+                    <p className="mt-4 text-base text-[#FFF9EF]/80">
+                      Tu {isReservation ? 'solicitud de reserva' : 'consulta'} ha sido enviada correctamente a nuestro equipo. Te responderemos lo antes posible al correo que proporcionaste.
+                    </p>
+                    <div className="mt-8 flex flex-col items-center gap-4">
+                      <button
+                        type="button"
+                        onClick={handleReset}
+                        className="contact-submit"
+                      >
+                        {isReservation ? 'Solicitar otra reserva' : 'Enviar otra consulta'}
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-red-400 bg-red-400/10 text-red-400">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="15" y1="9" x2="9" y2="15" />
+                        <line x1="9" y1="9" x2="15" y2="15" />
+                      </svg>
+                    </div>
+                    <h3 className="font-heading text-2xl font-bold uppercase tracking-[0.04em] text-red-400">
+                      Error al enviar
+                    </h3>
+                    <p className="mt-4 text-base text-[#FFF9EF]/80">
+                      No pudimos enviar tu solicitud. Verifica tu conexión a internet e intenta de nuevo, o contáctanos directamente por WhatsApp.
+                    </p>
+                    <div className="mt-8 flex flex-col items-center gap-4">
+                      <button
+                        type="button"
+                        onClick={handleReset}
+                        className="contact-submit"
+                      >
+                        Intentar de nuevo
+                      </button>
+                      <a
+                        href="https://wa.me/573054834087?text=Hola%20GOD%20LAB%2C%20tuve%20problemas%20con%20el%20formulario%20web."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="contact-secondary-action"
+                      >
+                        Contactar por WhatsApp
+                      </a>
+                    </div>
+                  </>
+                )}
               </div>
             ) : (
               <form
                 key={mode}
+                ref={formRef}
                 id="contact-request-panel"
                 role="tabpanel"
                 aria-labelledby={isReservation ? 'reservation-tab' : 'contact-tab'}
@@ -296,7 +352,7 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
                       name="phone"
                       autoComplete="tel"
                       required={isReservation}
-                      placeholder="+57 302 499 3023"
+                      placeholder="+57 350 852 344"
                       className="contact-input"
                     />
                   </div>
@@ -365,8 +421,21 @@ export function ContactSection({ mode, onModeChange }: ContactSectionProps) {
                   />
                 </div>
 
-                <button type="submit" className="contact-submit w-full mt-2">
-                  {isReservation ? 'Solicitar reserva' : 'Enviar consulta'}
+                <button
+                  type="submit"
+                  className="contact-submit w-full mt-2"
+                  disabled={status === 'sending'}
+                >
+                  {status === 'sending' ? (
+                    <span className="inline-flex items-center gap-2">
+                      <svg className="contact-spinner" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                      </svg>
+                      Enviando...
+                    </span>
+                  ) : (
+                    isReservation ? 'Solicitar reserva' : 'Enviar consulta'
+                  )}
                 </button>
               </form>
             )}
