@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from 'react'
 import { CatalogProductCard } from './CatalogProductCard'
+import { useProducts } from '../hooks/useProducts'
 import {
   catalogColorOptions,
   catalogCoverageOptions,
   catalogFilters,
   catalogFinishOptions,
-  catalogProducts,
+  catalogProducts as staticProducts,
   catalogRatingOptions,
   catalogSortOptions,
 } from '../data/catalog'
@@ -82,6 +83,7 @@ export function CatalogSection({
   onSelectFilter,
   onSelectSort,
 }: CatalogSectionProps) {
+  const { products: firestoreProducts, loading: productsLoading } = useProducts()
   const [showFilters, setShowFilters] = useState(false)
   const [showSortMenu, setShowSortMenu] = useState(false)
   const [pendingColor, setPendingColor] = useState<CatalogColorOption | null>(null)
@@ -100,6 +102,9 @@ export function CatalogSection({
   useEffect(() => {
     setPendingSort(activeSort)
   }, [activeSort])
+
+  // Use Firestore products if available, otherwise fall back to static data
+  const catalogProducts = firestoreProducts.length > 0 ? firestoreProducts : (productsLoading ? [] : staticProducts)
 
   const categoryProducts =
     activeFilter === 'Todos'
@@ -179,18 +184,29 @@ export function CatalogSection({
           <div className="flex flex-wrap items-center gap-3">
             <button
               type="button"
-              className="catalog-filter-btn border px-4 py-3 text-[0.72rem] font-heading font-semibold uppercase tracking-[0.2em] text-[#FFF9EF] transition hover:border-[#EEC77F] hover:text-[#EEC77F]"
+              className={`flex items-center gap-2 rounded-full px-5 py-2 text-[0.75rem] font-heading font-medium uppercase tracking-[0.15em] transition-all duration-300 backdrop-blur-md border ${
+                hasAdvancedFilters || showFilters
+                  ? 'bg-[#EEC77F] text-[#1A120A] border-[#EEC77F] shadow-[0_0_15px_rgba(238,199,127,0.3)]'
+                  : 'bg-white/5 text-[#FFF9EF] border-white/10 hover:bg-white/10 hover:border-white/20'
+              }`}
               aria-expanded={showFilters}
               onClick={() => {
                 setShowFilters((current) => !current)
                 setShowSortMenu(false)
               }}
             >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+              </svg>
               Filtros
             </button>
             <button
               type="button"
-              className="catalog-filter-btn border px-4 py-3 text-[0.72rem] font-heading font-semibold uppercase tracking-[0.2em] text-[#FFF9EF] transition hover:border-[#EEC77F] hover:text-[#EEC77F]"
+              className={`flex items-center gap-2 rounded-full px-5 py-2 text-[0.75rem] font-heading font-medium uppercase tracking-[0.15em] transition-all duration-300 backdrop-blur-md border ${
+                showSortMenu
+                  ? 'bg-[#EEC77F] text-[#1A120A] border-[#EEC77F] shadow-[0_0_15px_rgba(238,199,127,0.3)]'
+                  : 'bg-white/5 text-[#FFF9EF] border-white/10 hover:bg-white/10 hover:border-white/20'
+              }`}
               aria-expanded={showSortMenu}
               onClick={() => {
                 setShowSortMenu((current) => !current)
@@ -198,21 +214,24 @@ export function CatalogSection({
               }}
             >
               Ordenar por
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
             </button>
           </div>
         </div>
 
         <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="hidden sm:flex flex-wrap gap-3" aria-label="Filtros de catalogo">
+          <div className="hidden sm:flex flex-wrap gap-2" aria-label="Filtros de catalogo">
             {catalogFilters.map((filter) => {
               const isActive = activeFilter === filter
 
               return (
                 <button
-                  className={`catalog-filter border px-4 py-3 font-heading text-[0.64rem] font-semibold uppercase tracking-[0.2em] transition ${
+                  className={`rounded-full px-5 py-2 text-[0.68rem] font-heading font-medium uppercase tracking-[0.15em] transition-all duration-300 backdrop-blur-sm border ${
                     isActive
-                      ? 'catalog-filter--active'
-                      : 'border-[#EEC77F]/25 text-[#FFF9EF]/76 hover:border-[#EEC77F] hover:text-[#EEC77F]'
+                      ? 'bg-[#EEC77F] text-[#1A120A] border-[#EEC77F] shadow-[0_0_10px_rgba(238,199,127,0.2)]'
+                      : 'bg-white/5 text-[#FFF9EF]/80 border-white/10 hover:bg-white/10 hover:border-white/20 hover:text-[#EEC77F]'
                   }`}
                   key={filter}
                   type="button"
@@ -232,7 +251,7 @@ export function CatalogSection({
 
         {showFilters && (
           <div className="catalog-panel mt-5 grid grid-cols-1 gap-4 md:grid-cols-4">
-            <div className="catalog-panel__header">
+            <div className="catalog-panel__header col-span-1 md:col-span-4">
               <span className="catalog-panel__header-label">Filtros</span>
               <button
                 type="button"
@@ -268,7 +287,7 @@ export function CatalogSection({
                     </button>
                   ) : null}
                 </div>
-                <div className="grid auto-cols-max grid-flow-col gap-3 overflow-x-auto pb-3">
+                <div className="flex flex-wrap gap-3 pb-3">
                   {catalogColorOptions.map((option) => {
                     const isActive = pendingColor === option.label
                     return (
@@ -315,17 +334,17 @@ export function CatalogSection({
                     </button>
                   </div>
                 )}
-                <div className="grid gap-3">
+                <div className="flex flex-wrap gap-2">
                   {catalogFinishOptions.map((option) => {
                     const isActive = pendingFinish === option
                     return (
                       <button
                         key={option}
                         type="button"
-                        className={`catalog-filter border px-4 py-3 text-left font-heading text-[0.74rem] font-semibold uppercase tracking-[0.18em] transition ${
+                        className={`rounded-full px-5 py-2.5 text-left font-heading text-[0.7rem] font-medium uppercase tracking-[0.15em] transition-all duration-300 backdrop-blur-sm border ${
                           isActive
-                            ? 'catalog-filter--active'
-                            : 'border-[#EEC77F]/25 text-[#FFF9EF]/76 hover:border-[#EEC77F] hover:text-[#EEC77F]'
+                            ? 'bg-[#EEC77F] text-[#1A120A] border-[#EEC77F] shadow-[0_0_10px_rgba(238,199,127,0.2)]'
+                            : 'bg-white/5 text-[#FFF9EF]/80 border-white/10 hover:bg-white/10 hover:border-white/20 hover:text-[#EEC77F]'
                         }`}
                         onClick={() => setPendingFinish(option)}
                       >
@@ -357,17 +376,17 @@ export function CatalogSection({
                     </button>
                   </div>
                 )}
-                <div className="grid gap-3">
+                <div className="flex flex-wrap gap-2">
                   {catalogCoverageOptions.map((option) => {
                     const isActive = pendingCoverage === option
                     return (
                       <button
                         key={option}
                         type="button"
-                        className={`catalog-filter border px-4 py-3 text-left font-heading text-[0.74rem] font-semibold uppercase tracking-[0.18em] transition ${
+                        className={`rounded-full px-5 py-2.5 text-left font-heading text-[0.7rem] font-medium uppercase tracking-[0.15em] transition-all duration-300 backdrop-blur-sm border ${
                           isActive
-                            ? 'catalog-filter--active'
-                            : 'border-[#EEC77F]/25 text-[#FFF9EF]/76 hover:border-[#EEC77F] hover:text-[#EEC77F]'
+                            ? 'bg-[#EEC77F] text-[#1A120A] border-[#EEC77F] shadow-[0_0_10px_rgba(238,199,127,0.2)]'
+                            : 'bg-white/5 text-[#FFF9EF]/80 border-white/10 hover:bg-white/10 hover:border-white/20 hover:text-[#EEC77F]'
                         }`}
                         onClick={() => setPendingCoverage(option)}
                       >
@@ -399,17 +418,17 @@ export function CatalogSection({
                     </button>
                   </div>
                 )}
-                <div className="grid gap-3">
+                <div className="flex flex-wrap gap-2">
                   {catalogRatingOptions.map((option) => {
                     const isActive = pendingRating === option.value
                     return (
                       <button
                         key={option.label}
                         type="button"
-                        className={`catalog-filter border px-4 py-3 text-left font-heading text-[0.74rem] font-semibold uppercase tracking-[0.18em] transition ${
+                        className={`rounded-full px-5 py-2.5 text-left font-heading text-[0.7rem] font-medium uppercase tracking-[0.15em] transition-all duration-300 backdrop-blur-sm border ${
                           isActive
-                            ? 'catalog-filter--active'
-                            : 'border-[#EEC77F]/25 text-[#FFF9EF]/76 hover:border-[#EEC77F] hover:text-[#EEC77F]'
+                            ? 'bg-[#EEC77F] text-[#1A120A] border-[#EEC77F] shadow-[0_0_10px_rgba(238,199,127,0.2)]'
+                            : 'bg-white/5 text-[#FFF9EF]/80 border-white/10 hover:bg-white/10 hover:border-white/20 hover:text-[#EEC77F]'
                         }`}
                         onClick={() => setPendingRating(option.value)}
                       >
@@ -421,20 +440,20 @@ export function CatalogSection({
               </div>
             </div>
 
-            <div className="col-span-4 mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="col-span-1 md:col-span-4 mt-6 flex flex-col-reverse gap-4 sm:flex-row sm:items-center sm:justify-between border-t border-white/5 pt-5">
+              <button
+                type="button"
+                className="catalog-panel__clear px-4 py-2"
+                onClick={clearAllPendingFilters}
+              >
+                Borrar todo
+              </button>
               <button
                 type="button"
                 className="catalog-panel__search-button"
                 onClick={applyFilterSearch}
               >
                 Ver resultados
-              </button>
-              <button
-                type="button"
-                className="catalog-panel__clear catalog-panel__clear--footer"
-                onClick={clearAllPendingFilters}
-              >
-                Borrar todo
               </button>
             </div>
             {hasAdvancedFilters ? (
@@ -460,20 +479,30 @@ export function CatalogSection({
 
         {showSortMenu && (
           <div className="catalog-panel mt-5">
-            <p className="mb-3 font-heading text-[0.72rem] uppercase tracking-[0.3em] text-[#EEC77F]">
-              Ordenar por
-            </p>
-            <div className="grid gap-3 lg:grid-cols-2">
+            <div className="mb-4 flex items-center justify-between">
+              <p className="font-heading text-[0.72rem] uppercase tracking-[0.3em] text-[#EEC77F]">
+                Ordenar por
+              </p>
+              <button
+                type="button"
+                className="catalog-panel__close"
+                onClick={() => setShowSortMenu(false)}
+                aria-label="Cerrar ordenar"
+              >
+                ×
+              </button>
+            </div>
+            <div className="flex flex-wrap gap-2">
               {catalogSortOptions.map((sortOption) => {
                 const isActive = pendingSort === sortOption
                 return (
                   <button
                     key={sortOption}
                     type="button"
-                    className={`catalog-filter border px-4 py-3 text-left font-heading text-[0.74rem] font-semibold uppercase tracking-[0.18em] transition ${
+                    className={`rounded-full px-5 py-3 text-center font-heading text-[0.7rem] font-medium uppercase tracking-[0.15em] transition-all duration-300 backdrop-blur-sm border ${
                       isActive
-                        ? 'catalog-filter--active'
-                        : 'border-[#EEC77F]/25 text-[#FFF9EF]/76 hover:border-[#EEC77F] hover:text-[#EEC77F]'
+                        ? 'bg-[#EEC77F] text-[#1A120A] border-[#EEC77F] shadow-[0_0_10px_rgba(238,199,127,0.2)]'
+                        : 'bg-white/5 text-[#FFF9EF]/80 border-white/10 hover:bg-white/10 hover:border-white/20 hover:text-[#EEC77F]'
                     }`}
                     onClick={() => setPendingSort(sortOption)}
                   >

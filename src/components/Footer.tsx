@@ -94,6 +94,25 @@ export function Footer({ onNavigate }: FooterProps) {
         </div>
       </div>
 
+      {/* Admin Panel Access Link (Discreet) */}
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 flex justify-center py-4 border-t border-[#EEC77F]/10">
+        <a 
+          href="#godlab-admin-secure-280" 
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.hash = 'godlab-admin-secure-280';
+          }}
+          className="text-[#EEC77F]/20 hover:text-[#EEC77F]/60 text-xs font-heading uppercase tracking-widest transition-colors duration-300 flex items-center gap-2"
+          aria-label="Acceso Administrativo"
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          Acceder Admin
+        </a>
+      </div>
+
       <hr className="footer-divider" />
 
       <p className="footer-copyright">

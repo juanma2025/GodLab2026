@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { AdminPanel } from './components/AdminPanel'
 import { CatalogSection } from './components/CatalogSection'
 import { ContactSection } from './components/ContactSection'
 import type { ContactMode } from './components/ContactSection'
@@ -11,24 +12,27 @@ import { ScrollToTop } from './components/ScrollToTop'
 import type { CatalogFilter, CatalogSort } from './data/catalog'
 import type { PageId } from './data/navigation'
 
-const pageTitles: Record<PageId, string> = {
+const ADMIN_ROUTE = 'godlab-admin-secure-280'
+
+const pageTitles: Record<PageId | typeof ADMIN_ROUTE, string> = {
   inicio: 'GOD LAB',
   catalogo: 'Catalogo / GOD LAB',
   metodo: 'Metodo / GOD LAB',
   portafolio: 'Portafolio / GOD LAB',
   contacto: 'Contacto / GOD LAB',
+  [ADMIN_ROUTE]: 'Admin / GOD LAB',
 }
 
-const pageIds = Object.keys(pageTitles) as PageId[]
+const pageIds = Object.keys(pageTitles) as (PageId | typeof ADMIN_ROUTE)[]
 
-function getPageFromHash(): PageId {
-  const hashPage = window.location.hash.replace('#', '') as PageId
+function getPageFromHash(): PageId | typeof ADMIN_ROUTE {
+  const hashPage = window.location.hash.replace('#', '') as PageId | typeof ADMIN_ROUTE
 
   return pageIds.includes(hashPage) ? hashPage : 'inicio'
 }
 
 function App() {
-  const [activePage, setActivePage] = useState<PageId>(getPageFromHash)
+  const [activePage, setActivePage] = useState<PageId | typeof ADMIN_ROUTE>(getPageFromHash)
   const [activeFilter, setActiveFilter] = useState<CatalogFilter>('Todos')
   const [activeSort, setActiveSort] = useState<CatalogSort>('En primer plano')
   const [contactMode, setContactMode] = useState<ContactMode>('contact')
@@ -61,7 +65,7 @@ function App() {
     document.body.classList.toggle('theme-dark', !isLightMode)
   }, [isLightMode])
 
-  const handleNavigate = (page: PageId) => {
+  const handleNavigate = (page: PageId | typeof ADMIN_ROUTE) => {
     if (page === 'contacto') {
       setContactMode('contact')
     }
@@ -103,6 +107,8 @@ function App() {
         )
       case 'contacto':
         return <ContactSection mode={contactMode} onModeChange={setContactMode} />
+      case ADMIN_ROUTE:
+        return <AdminPanel />
       case 'inicio':
       default:
         return <HeroSection onNavigate={handleNavigate} onReserve={handleReserve} />
@@ -116,7 +122,7 @@ function App() {
       </a>
 
       <Header
-        activePage={activePage}
+        activePage={activePage === ADMIN_ROUTE ? 'inicio' : activePage}
         isLightMode={isLightMode}
         onNavigate={handleNavigate}
         onReserve={handleReserve}
