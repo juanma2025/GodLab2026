@@ -117,6 +117,7 @@ export function Footer({ onNavigate }: FooterProps) {
 
       <p className="footer-copyright">
         &copy; {year} GOD LAB — Prestige Beauty Portfolio. Todos los derechos reservados.
+        <span className="block mt-2 text-xs opacity-80 sm:inline sm:mt-0 sm:ml-4">v1.2.0</span>
       </p>
     </footer>
   )

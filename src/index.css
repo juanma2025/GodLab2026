@@ -2150,13 +2150,13 @@ body.theme-light {
   font-weight: var(--fw-semibold);
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: var(--gl-cream);
+  color: #ffffff;
 }
 
 .footer-tagline {
   font-size: 0.92rem;
   line-height: 1.65;
-  color: rgba(255, 249, 239, 0.52);
+  color: rgba(255, 255, 255, 0.7);
   margin-top: 0.75rem;
 }
 
@@ -2166,20 +2166,20 @@ body.theme-light {
   font-weight: var(--fw-semibold);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--gl-gold-light);
+  color: #ffffff;
   margin-bottom: 1rem;
 }
 
 .footer-link {
   display: block;
   font-size: 0.88rem;
-  color: rgba(255, 249, 239, 0.56);
+  color: rgba(255, 255, 255, 0.6);
   padding: 0.3rem 0;
   transition: color 300ms var(--ease-spring);
 }
 
 .footer-link:hover {
-  color: var(--gl-gold-light);
+  color: #ffffff;
 }
 
 .footer-social {
@@ -2195,9 +2195,9 @@ body.theme-light {
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  border: 1px solid rgba(238, 199, 127, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 249, 239, 0.7);
+  color: rgba(255, 255, 255, 0.7);
   transition: background 300ms var(--ease-spring), color 300ms var(--ease-spring), border-color 300ms var(--ease-spring), transform 300ms var(--ease-spring);
 }
 
@@ -2220,7 +2220,8 @@ body.theme-light {
   font-size: 0.62rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: rgba(255, 249, 239, 0.38);
+  color: #ffffff;
+  opacity: 0.85;
 }
 
 /* ===== SCROLL TO TOP ===== */
